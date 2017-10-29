@@ -18,6 +18,7 @@ mail
 .python-eggs
 .python_history
 .ratpoison_history
+.s3cfg
 .screen
 .slrnpull
 .tox
