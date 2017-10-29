@@ -24,6 +24,7 @@ VirtualBox VMs
 .moosic/saved_state
 .moosic/server_log
 .msmtprc
+.multirust
 .pip
 .procmail/blacklist
 .procmail/list
