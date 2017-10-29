@@ -5,7 +5,12 @@ mail
 .anacron
 .ansible
 .bazaar/lock
+.bitlbee
+.bundle
+.cargo
+.docker
 .fetchmailrc
+.gem
 .ICEauthority
 .irb-history
 .irssi
@@ -18,6 +23,7 @@ mail
 .python-eggs
 .python_history
 .ratpoison_history
+.rbenv
 .s3cfg
 .screen
 .slrnpull
