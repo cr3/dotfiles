@@ -3,6 +3,7 @@
 log
 mail
 sites
+VirtualBox VMs
 .anacron
 .ansible
 .bazaar/lock
