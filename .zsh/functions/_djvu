@@ -1,0 +1,11 @@
+#compdef evince
+
+local expl ext=''
+
+if [[ "$1" == '-z' ]]; then
+  ext='(|.bz2|.gz|.Z)'
+  shift
+fi
+
+_description files expl 'DJVU or PDF file'
+_files "$@" "$expl[@]" -g "*.(#i)(djvu|pdf)$ext(-.)"
