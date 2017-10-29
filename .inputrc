@@ -1,0 +1,9 @@
+# Filename: $HOME/.inputrc
+# Purpose:  Individual readline initialization file
+
+# Many programs use readline to present a command line to the user. The
+# following variables are set to preserve the vi editing mode.
+set editing-mode vi
+set keymap vi
+
+set convert-meta off
