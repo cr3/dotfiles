@@ -42,6 +42,9 @@ VirtualBox VMs
 .s3cfg
 .screen
 .slrnpull
+.spamassassin/bayes_journal
+.spamassassin/bayes_seen
+.spamassassin/bayes_toks
 .tox
 .travis
 .vault
