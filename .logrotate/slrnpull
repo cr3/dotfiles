@@ -1,0 +1,3 @@
+/home/cr3/log/slrnpull.log {
+  rotate 1
+}

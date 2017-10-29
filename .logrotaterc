@@ -1,0 +1,16 @@
+# .logrotaterc
+
+# Rotate log files weekly.
+weekly
+
+# Keep 4 months worth of backlogs.
+rotate 4
+
+# Create new (empty) log files after rotating old ones
+create
+
+# Compress log files.
+compress
+
+# Custom log rotation scripts.
+include /home/cr3/.logrotate
