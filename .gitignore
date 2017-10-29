@@ -1,3 +1,5 @@
+*.pyc
+*~
 log
 mail
 .ansible
@@ -6,11 +8,16 @@ mail
 .ICEauthority
 .mairixdb
 .msmtprc
+.pip
 .procmail/blacklist
 .procmail/list
 .procmail/whitelist
+.python-eggs
+.python_history
 .ratpoison_history
 .screen
+.tox
+.travis
 .vault
 .viminfo
 .vim/.netrwhist
