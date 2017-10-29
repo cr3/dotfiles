@@ -1,0 +1,4 @@
+#!/bin/sh
+
+test -x $HOME/bin/sa-train || exit 0
+$HOME/bin/sa-train

@@ -1,0 +1,9 @@
+# environment
+SHELL=/bin/sh
+PATH="/home/cr3/sbin:/home/cr3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
+# fetchmail
+*/2 * * * * test -x $HOME/bin/is-connected && $HOME/bin/is-connected && fetchmail -s
+# slrnpull
+0 * * * * test -x $HOME/bin/is-connected && $HOME/bin/is-connected && slrnpull -d $HOME/.slrnpull -h news21.bellnet.ca --logfile $HOME/log/slrnpull.log >/dev/null
+# anacron
+0 * * * * test -r $HOME/.anacrontab && anacron -q -d -t $HOME/.anacrontab -S $HOME/.anacron -s >/dev/null

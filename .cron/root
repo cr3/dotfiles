@@ -1,0 +1,4 @@
+# Daily synchronization of the system clock
+0 1 * * * /usr/sbin/ntpdate -t 10 navobs1.wustl.edu > /dev/null
+# An hour later, set the hardware clock
+0 2 * * * /sbin/hwclock --systohc

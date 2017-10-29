@@ -2,6 +2,7 @@
 *~
 log
 mail
+.anacron
 .ansible
 .bazaar/lock
 .fetchmailrc

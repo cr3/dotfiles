@@ -1,0 +1,4 @@
+#!/bin/sh
+
+test -x $HOME/bin/mail-archive || exit 0
+$HOME/bin/mail-archive

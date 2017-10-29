@@ -1,0 +1,7 @@
+# .anacrontab
+SHELL=/bin/sh
+PATH=/home/cr3/sbin:/home/cr3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+# These replace cron's entries
+1	5	cr3.cron.daily		nice run-parts --report $HOME/.cron.daily
+7	10	cr3.cron.weekly	nice run-parts --report $HOME/.cron.weekly
+@monthly 15	cr3.cron.monthly	nice run-parts --report $HOME/.cron.monthly
