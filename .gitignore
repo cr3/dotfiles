@@ -1,5 +1,6 @@
 log
 mail
+.ansible
 .bazaar/lock
 .fetchmailrc
 .mairixdb
@@ -8,6 +9,7 @@ mail
 .procmail/list
 .procmail/whitelist
 .screen
+.vault
 .viminfo
 .vim/.netrwhist
 .zhistory
