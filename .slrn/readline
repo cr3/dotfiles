@@ -1,0 +1,17 @@
+% Filename: $HOME/.slrn/readline
+% Purpose:  Command prompt key bindings
+
+setkey readline bol		 "^A"		% Beginning of line
+setkey readline eol		 "^E"		% End of line
+setkey readline right		 "\e[C"		% Move right
+setkey readline left		 "\e[D"		% Move left
+setkey readline bdel		 "^H"		% Delete backward
+setkey readline bdel		 "^?"		% Delete Backward
+setkey readline del		 "^D"		% Delete Foreword
+setkey readline delbol		 "^U"		% Delete to Beginning of line
+setkey readline delbow		 "^W"		% Delete to Beginning of word
+setkey readline deleol		 "^K"		% Delete to End of line
+setkey readline trim		 "\e/"		% Trim whitespace
+setkey readline quoted_insert	 "^Q"		% Quoted insert
+setkey readline complete	 "\t"		% Complete filename
+setkey readline cycle		 " "		% Cycle among filenames

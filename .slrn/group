@@ -1,0 +1,50 @@
+% Filename: $HOME/.slrn/group
+% Purpose:  Group mode key bindings
+
+% Cursor movement:
+setkey group line_down        "j"
+setkey group line_up          "k"
+setkey group page_down        "^V"     % Scroll to the next page
+setkey group page_down        "\e[6~"
+setkey group page_down        "^D"
+setkey group page_up          "\eV"    % Scroll to the previous page
+setkey group page_up          "\e[5~"
+setkey group page_up          "^U"
+setkey group bob              "\e<"    % Go to the bottom of the list
+setkey group bob              "^K\eOB"
+setkey group bob              "^K\e[B"
+setkey group eob              "\e>"    % Go to the top of the list
+setkey group eob              "^K\eOB"
+setkey group eob              "^K\e[B"
+setkey group group_search_backward "?"% Group keyword search backward
+setkey group group_search_forward  "/" % Group keyword search forward
+
+% Actions:
+setkey group select_group     " "      % Enter the current newsgroup
+setkey group select_group     "\r"
+setkey group post             "P"      % Post an article
+setkey group post_postponed   "\eP"    % Post or edit a postponed article
+setkey group refresh_groups   "G"      % Get new news from server
+setkey group toggle_scoring   "K"      % Select scoring mode
+setkey group repeat_last_key  "."      % Repeat last key sequence
+setkey group evaluate_cmd     "^X\e"   % Read line and interpret it as S-Lang
+setkey group suspend          "^Z"     % Suspend slrn
+setkey group quit             "Q"      % Quit slrn
+
+% Group management:
+setkey group catchup          "C"      % Mark all articles as read
+setkey group uncatchup        "\eu"    % Mark all articles as unread
+setkey group add_group        "a"      % Add a new newsgroup
+setkey group subscribe        "S"      % Subscribe to the current newsgroup
+setkey group unsubscribe      "U"      % Unsubscribe from the current newsgroup
+setkey group move_group       "m"      % Move newsgroup to a different location
+setkey group transpose_groups "^X^T"   % Transpose position of groups
+setkey group save_newsrc      "X"      % Force a save of the newsrc file
+
+% Display:
+setkey group toggle_group_formats "^H" % Toggle group display formats
+setkey group toggle_hidden    "l"      % Toggle display of hidden groups
+setkey group toggle_list_all  "L"      % Toggle listing of unsubscribed groups
+setkey group redraw           "^L"     % Redraw the screen
+setkey group redraw           "^R"
+setkey group help             "?"      % Display a help screen

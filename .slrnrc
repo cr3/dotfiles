@@ -1,0 +1,225 @@
+%
+%% 1. Tell slrn about your identity (name, email address and such)
+%
+
+% The "From:" header will be generated from the following three variables.
+% With the example settings, it would read "john@doe.com (John Doe)".
+set username		"cr3"
+set hostname		"nospam.interunion.ca"
+set realname		"Marc Tardif"
+
+% Set this if you want replies to your articles to go to a address different
+% from the one in "From:".
+%set replyto		"marc@interunion.ca"
+
+% What to put into the "Organization:" header line.
+set organization	"Interunion"
+
+% The name of your signature file.  If "", no signature is added.
+set signature		".signature"
+
+%
+%% 2. Server specific settings
+%
+
+% This can either be set to "nntp" (read online) or "spool" (use local spool)
+set server_object	"spool"
+
+% This can be "nntp" (post directly to the server), "inews" (use external
+% program for posting) or "slrnpull" (spool message for slrnpull to send).
+set post_object		"slrnpull"
+
+% Set this to zero if you want to leave Message-ID generation to your server
+% or your system does not have a proper unique hostname.
+set generate_message_id 1
+
+% If non-zero, slrn reads the active file on each startup.  You might want to
+% use this if your network connection is fast or the server has few groups.
+set read_active 1
+
+% The following variables are only meaningful when using spool mode:
+
+% Basic directory settings
+set spool_inn_root	"/home/cr3/.slrnpull"
+set spool_root		"/home/cr3/.slrnpull/news"
+set spool_nov_root	"/home/cr3/.slrnpull/over.view"
+
+% These are relative to spool_inn_root unless they start with "/".
+%set spool_active_file "data/active"
+%set spool_activetimes_file "data/active.times"
+%set spool_newsgroups_file "data/newsgroups"
+
+% This value is relative to the directories under spool_nov_root:
+%set spool_nov_file ".overview"
+
+% Whether to check for each article when reading an overview file (slower,
+% but may save you from lots of "article not available" errors).
+%set spool_check_up_on_nov 0
+
+%
+%% 3. Which external programs do you want to use?
+%
+
+% Note OS/2 and Win32 users: 
+%   To separate directories you can either use a single '/' or
+%   double '\\'. Single backslashes are not supported.  For example, use
+%   "C:\\home\\file.txt" or "C:/home/file.txt" but NOT "C:\home\file.txt"
+
+% Set your favourite editor.  Use %s for the file name and %d for the line
+% where the cursor should be placed (usually at the beginning of the body).
+set editor_command "vim -f +%d '%s'"
+
+% You can have separate commands for editing posts, mail, and score files.
+set mail_editor_command "mutt -H '%s'"
+set post_editor_command "mutt -H '%s'"
+set score_editor_command "vim '%s'" % /home/cr3/.slrn/scoring"
+
+% If non-zero, abort posting or email operation if the file was not modified
+% by the editor.
+set abort_unmodified_edits 1
+
+% In case we need metamail to display an article:
+set metamail_command "metamail"
+
+% WWW browser to use. Xbrowser is used when the DISPLAY environment variable
+% is set; non_Xbrowser otherwise.
+set non_Xbrowser "lynx '%s'"
+%set Xbrowser "netscape '%s' &"
+
+% Command to use for printing
+% Note: On Win32, this variable defines the name of the printer queue to use.
+%set printer_name "lpr -Plp"
+
+% In case you want to use another mailer than sendmail.  Be sure that it
+% implements the same interface, though!
+%set sendmail_command "/usr/lib/sendmail -oi -t -oem -odb"
+
+% Set this to one if you want the "From:" header in e-mails to be generated
+% from the hostname / username / realname variable.
+% Note: Not all MTAs are configured to allow this.
+%set generate_email_from 0
+
+%
+%% 4. Directory / file names
+%
+
+% Note: All filenames in this section are relative to HOME unless they start
+%       with a '/'.
+
+% Filename where articles / email you sent are archived.
+% Note: If these are unset, slrn does not keep a copy of outgoing messages.
+set save_posts "news/posts"
+set save_replies "news/replies"
+
+% File where failed posts are appended.  Use "" to disable saving.
+%set failed_posts_file "dead.letter"
+
+% Name of score file.
+set scorefile "news/score"
+
+% Name of directory where decoded files are placed.
+set decode_directory "news"
+  
+% Directory where all other files are saved.
+set save_directory "news"
+
+% Directory where postponed articles are placed. Please make sure it exists.
+set postpone_directory "news/postponed"
+
+% Whether to put temporary files for postings, followups and replies in the
+% directory specified by the TMPDIR environment variable or /tmp.
+%set use_tmpdir 0
+
+%
+%% 5. Attribution lines / custom headers
+%
+
+% This sets the attribution lines for follow-ups and replies.  The following
+% format specifiers are recognized:
+%  %d:date, %D:date (formatted), %r:real name, %R:first name,
+%  %f:email address, %s:subject, %m:msgid, %n:newsgroups, %%: percent
+%set followup_string "On %D, %r <%f> wrote:"
+%set reply_string "In %n, you wrote:"
+
+% Custom headers to add to *new* posts
+%set custom_headers "Mail-Copies-To: nobody"
+
+% Custom headers for followup/reply/supersedes.  These can use format
+% specifiers as in the 'followup_string' variable.
+%set followup_custom_headers "Mail-Copies-To: nobody"
+%set reply_custom_headers "X-newsgroup: %n\nX-realname: %r"
+%set supersedes_custom_headers "X-Superseded-Date: %d"
+
+% These are inserted when sending email CCs of your postings.
+% cc_post_string currently does not support any % escapes.
+%set cc_followup_string "[This message has also been posted to %n.]"
+%set cc_post_string "[This message has also been posted.]"
+
+%
+%% 6. Character mapping / MIME support
+%
+
+% Character set used for the local display; valid values are:
+%   isolatin, ibm850, ibm852, next, koi8
+%set charset isolatin
+
+% Character set to declare when posting 8bit characters. Do *not* use
+% the same value as for "charset" here.
+%set mime_charset "iso-8859-1"
+
+% You may set this to a comma-separated list of MIME charsets your terminal
+% is capable to display. The example adds two Chinese charsets:
+%compatible_charsets "Big5,gb2312"
+
+% If non-zero, call metamail for MIME formats slrn cannot handle.
+%set use_metamail 1
+
+%
+%% 7. Some preferences for the header window (see the manual for more)
+%
+
+% These sorting methods are available:
+% If 0, do not sort.  If 1, perform threading.  If 2, sort by subject.
+% If 3, thread then sort result by subject.
+% If 4, sort by score.  If 5, thread then sort by score.
+% If 6, sort by score and subject.
+% If 7, thread, then sort by score and subject.
+% If 8, sort by date with most recent first.
+% If 9, thread, then sort by date with most recent first.
+% If 10, sort by date with most recent last.
+% If 11, thread then sort by date with most recent last.
+%set sorting_method 3
+
+% If non-zero, a header with a new subject will start a new thread.
+%set new_subject_breaks_threads 0
+
+%
+%% 8. Some preferences for the article pager (see the manual for more)
+%
+
+% Which headers do you want to see by default?
+% You can also match all headers starting with a given string and exclude
+% specific headers by preceding them with "!" (e.g. use "X-,!X-Trace:" to
+% display all the "X-"headers except "X-Trace:").
+%visible_headers "From:,Subject:,Newsgroups:,Followup-To:,Reply-To:"
+
+% If non-zero, #v+ and #v- will be interpreted as markers of verbatim lines.
+%set process_verbatim_marks	1
+
+% If non-zero, hide #v+/#v- verbatim marks.
+%set hide_verbatim_marks 0
+  
+% If non-zero, hide signature in articles.
+set hide_signature		1
+
+% If non-zero, hide PGP signature in articles.
+set hide_pgpsignature		1
+
+set auto_mark_article_as_read	0
+set query_read_group_cutoff	1000
+set confirm_actions		0
+
+include .slrn/color
+include .slrn/group
+include .slrn/article
+include .slrn/readline

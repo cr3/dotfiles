@@ -6,6 +6,8 @@ mail
 .bazaar/lock
 .fetchmailrc
 .ICEauthority
+.irb-history
+.irssi
 .mairixdb
 .msmtprc
 .pip
@@ -16,6 +18,7 @@ mail
 .python_history
 .ratpoison_history
 .screen
+.slrnpull
 .tox
 .travis
 .vault

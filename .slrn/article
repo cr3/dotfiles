@@ -1,0 +1,114 @@
+% Filename: $HOME/.slrn/article
+% Purpose:  Article mode key bindings
+ 
+% General movement:
+setkey article next                    "n"	% next unread article
+setkey article previous                "p"	% previous unread article
+setkey article skip_to_next_group      "N"	% go to the next group
+setkey article skip_to_next_group      "\e\e[C"
+setkey article skip_to_next_group      "\e\eOC"
+setkey article skip_to_previous_group  "\e\e[D"	% go to the previous group
+setkey article skip_to_previous_group  "\e\eOD"
+setkey article next_high_score         "!"	% next article with high score
+setkey article next_same_subject       "="	% next article with same subject
+setkey article goto_last_read          "L"	% go to the last read article
+
+% Actions:
+setkey article post                 "P"		% Post a new article
+setkey article post_postponed       "\eP"	% Post/edit a postponed article
+setkey article followup             "f"		% Post a followup
+setkey article reply                "r"		% Reply to poster
+setkey article forward              "F"		% Forward posting via mail
+setkey article supersede            "\e^S"	% Supersede article
+setkey article cancel               "\e^C"	% Cancel article
+setkey article save                 "O"		% Save article
+setkey article pipe                 "|"		% Pipe article
+setkey article print                "y"		% Print article
+setkey article decode               ":"		% Decode article
+setkey article suspend              "^Z"	% Suspend slrn
+setkey article quit                 "q"		% Quit slrn
+setkey article fast_quit            "Q"		% Quit slrn immediately
+
+% Moving in the article pager:
+setkey article article_line_down    "^E"	% Scroll article down one line
+setkey article article_line_up      "^Y"	% Scroll article up one line
+setkey article article_page_down    " "		% Scroll article down one page
+setkey article article_page_up      "^?"	% Scroll article up one page
+setkey article article_page_up      "b"		% Scroll article up one page
+setkey article article_eob          ">"		% Move to the end of the article
+setkey article article_bob          "<"		% Move to the beginning
+setkey article article_left         "\eOD"	% Pan article to the left
+setkey article article_left         "\e[D"
+setkey article article_right        "\eOC"	% Pan article to the right
+setkey article article_right        "\e[C"
+setkey article article_search       "/"		% Search forward in the article
+setkey article skip_quotes          "\t"	% Skip beyond quoted text
+setkey article forward_digest       "g"		% Skip to next digest
+
+% Moving in the header display:
+setkey article header_line_down      "j"
+setkey article header_line_up        "k"
+setkey article header_page_down      "^V"	% Scroll down one page
+setkey article header_page_down      "\e[6~"
+setkey article header_page_down      "\e[G"	% (FreeBSD keycode)
+setkey article header_page_down      "^D"
+setkey article header_page_up        "\eV"	% Scroll up one page
+setkey article header_page_up        "\e[5~"
+setkey article header_page_up        "\e[I"	% (FreeBSD keycode)
+setkey article header_page_up        "^U"
+setkey article header_eob            "\e>"	% Go to last article in group
+setkey article header_bob            "\e<"	% Go to first article in group
+setkey article goto_article          "J"	% Move to article (number)
+setkey article author_search_forward   "a"	% Author search forward
+setkey article author_search_backward  "A"	% Author search backward
+setkey article subject_search_forward  "s"	% Subject search forward
+setkey article subject_search_backward "S"	% Subject search backward
+
+% Marking as read/unread:
+setkey article delete                  "\ed"	% Mark article as read
+setkey article undelete                "u"	% Mark article as unread
+setkey article delete_thread           "d"	% Mark (Sub-)Thread as read
+setkey article delete_thread           "l"	% Mark (Sub-)Thread as read
+setkey article catchup_all             "c"	% Mark all articles as read
+setkey article catchup_all             "\ec"
+setkey article catchup                 "\eC"	% Catchup (up to this article)
+setkey article uncatchup_all           "\eu"	% Mark all articles as unread
+setkey article uncatchup               "\eU"	% Uncatchup (up to this article)
+
+setkey article nn_expunge              "$"	% Remove all read articles
+
+% Display properties:
+setkey article toggle_headers          "h"	% Full headers (on/off)
+setkey article toggle_rot13            "\eR"	% Toggle ROT-13 decryption
+setkey article toggle_quotes           "T"	% Display quoted lines (on/off)
+setkey article toggle_signature        "\\"	% Show signature (on/off)
+setkey article wrap_article            "W"	% Wrap long lines (on/off)
+setkey article show_spoilers           "\e?"	% Reveal spoilers (on/off)
+setkey article toggle_pgpsignature     "]"	% Show PGP signature (on/off)
+setkey article toggle_verbatim_marks   "["	% Show verbatim marks (on/off)
+setkey article enlarge_article_window  "^"	% Enlarge the article window
+setkey article shrink_article_window   "^^"	% Shrink the article window
+setkey article zoom_article_window     "z"	% Maximize/Unmaximize article
+setkey article hide_article            "H"	% Hide/Show the article window
+setkey article browse_url              "U"	% Search for URL and follow it
+setkey article toggle_sort             "\eS"	% Select threading method
+setkey article toggle_collapse_threads "\et"	% Collapse/Uncollapse thread
+setkey article toggle_header_formats   "^H"	% Toggle header display formats
+setkey article redraw                  "^L"	% Redraw screen
+setkey article redraw                  "^R"	% Redraw screen
+setkey article help                    "?"	% Display help screen
+
+% Miscellaneous actions:
+setkey article create_score            "K"	% Create a scorefile entry
+setkey article view_scores             "v"	% Show which rules matched
+setkey article locate_article          "\el"	% Locate article by Message-ID
+setkey article get_children_headers    "\e^P"	% Find all children
+setkey article get_parent_header       "\ep"	% Reconstruct thread
+setkey article mark_spot               ";"	% Mark current article position
+setkey article exchange_mark           "\e;"	% Return to marked article
+setkey article tag_header              "#"	% Numerically tag article
+setkey article untag_headers           "\e#"	% Remove all numerical tags
+setkey article toggle_header_tag       "*"	% Set/remove header tag
+setkey article repeat_last_key         "."	% Repeat last key sequence
+setkey article grouplens_rate_article  "0"	% Rate article with grouplens
+setkey article evaluate_cmd            "^X\e"	% Interpret line as S-Lang
