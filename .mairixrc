@@ -1,0 +1,16 @@
+# .mairixrc
+
+# Directory where I keep all of my mail.
+base=/home/cr3/mail
+
+# Put search results in a mailbox named "search", in mbox format.
+mfolder=search
+mformat=mbox
+
+# This is as good a place as any to keep the database.
+database=/home/cr3/.mairixdb
+
+# Things to index.
+mbox=archive/*
+mbox=inbox
+mbox=tech.gz

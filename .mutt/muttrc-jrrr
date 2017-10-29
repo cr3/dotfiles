@@ -1,0 +1,15 @@
+# Filename: $HOME/.mutt/muttrc-jrrr
+
+# Where my mailboxes live.
+set folder=~/mail
+
+# Mailbox where incoming mail is dropped.
+set spoolfile=+inbox
+
+# File which contains my signature.
+set signature="~/.signature"
+
+# Addresses where mail is received.
+alternates "marc@interunion.ca"
+alternates "intmktg@gmail.com"
+alternates "marc@ubuntu.com"

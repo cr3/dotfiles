@@ -1,0 +1,6 @@
+# Filename: $HOME/.mutt/folder-hook
+
+folder-hook .			'set sort=threads'
+folder-hook =inbox		'set sort=date-sent'
+folder-hook =archive/*		'set sort=date-sent'
+folder-hook =channel/*		'set sort=reverse-date-sent'

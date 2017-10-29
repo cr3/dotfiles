@@ -1,0 +1,4 @@
+# Filename: $HOME/.mutt/mailboxes-jrrr
+
+mailboxes =inbox
+mailboxes `echo ~/mail/list/*`

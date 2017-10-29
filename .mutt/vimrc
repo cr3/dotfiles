@@ -1,0 +1,5 @@
+" Vim syntax file
+
+source ~/.vimrc
+
+set textwidth=75

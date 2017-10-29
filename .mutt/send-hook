@@ -1,0 +1,13 @@
+# .mutt/send-hook
+
+# Change From address
+send-hook . 'my_hdr From: Marc Tardif <marc@interunion.ca>'
+send-hook '~t .*ubuntu\.com$' 'my_hdr From: Marc Tardif <marc@ubuntu.com>'
+
+# Automatically encrypt messages.
+#send-hook . 'set crypt_autoencrypt=no'
+#send-hook '~t .*' 'reset crypt_autoencrypt'
+#
+#send-hook "~t DUMMY `(gpg --list-keys | sed -ne 's/^[^<]*<\([a-z0-9\.\-\_]*@[a-z0-9\.\-\_]*\)>.*/send-hook \"~t \1\" \"set crypt_autoencrypt=yes\"/gip' | sort -u > ~/.mutt/autoencrypt)`" 'set crypt_autoencrypt=yes'
+#
+#source ~/.mutt/autoencrypt

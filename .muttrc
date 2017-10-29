@@ -1,0 +1,132 @@
+# .muttrc
+
+reset all
+unhook *
+
+source ~/.mutt/muttrc-`hostname`
+
+## Configuration variables:
+
+# Use ASCII instead of ACS chars for threads.
+set ascii_chars=yes
+# Go to the editor right away when composing.
+set autoedit=yes
+# Character set of the terminal.
+set charset=utf-8
+# Don't ask me if i want to append to mailboxes.
+set confirmappend=no
+# Always save a copy of outgoing messages.
+set copy=yes
+# Purge deleted messages without asking.
+set delete=yes
+# Don't edit headers because it affects send hooks.
+set edit_headers=no
+# Editor to use when composing messages.
+set editor="vim -u ~/.mutt/vimrc"
+# If set to "yes" outbound PGP emails will be saved unsigned and unencrypted.
+set fcc_clear=no
+# Weed and MIME decode forwaded messages.
+set forward_decode=yes
+# Subject to use when forwarding messages.
+set forward_format="[Fwd: %s]"
+# Always include messages when replying.
+set include=yes
+# How often to poll for new mail.
+set mail_check=10
+# File to consult when displaying MIME bodies.
+set mailcap_path="${HOME}/.mailcap"
+# Don't care about whether a message is old.
+set mark_old=no
+# Shere to store read messages.
+set mbox=+inbox
+# Forwarded emails are done as MIME attachments.
+set mime_forward=no
+# Don't ask about moving messages, just do it.
+set move=yes
+# Number of lines of context to give when scrolling.
+set pager_context=0
+# How many index lines to show in the pager.
+set pager_index_lines=6
+# Don't move to the next message on next-page.
+set pager_stop=yes
+# Don't automatically verify message signatures.
+set pgp_verify_sig=no
+# Decode messages piped to commands.
+set pipe_decode=yes
+# Mailbox to store postponed messages in.
+set postponed=+draft
+# How to print things (I like to save trees).
+set print_command=/bin/false
+# Use abook for address queries.
+set query_command="abook --mutt-query %s"
+# Show progress when reading from a mailbox.
+set read_inc=25
+# Don't recall postponed messages when composing.
+set recall=no
+# Default location to save outgoing mail.
+set record=+archive/outbox
+# Always use reply-to if present.
+set reply_to=yes
+# Reverse the address based on the message header.
+set reverse_name=yes
+# Character set for outgoing messages.
+set send_charset="us-ascii:iso-8859-1:utf-8"
+# Program and arguments used to deliver mail sent.
+set sendmail="/usr/bin/procmail ${HOME}/.procmail/outgoing.pm"
+# Program to use for shell escapes
+set shell="/bin/zsh"
+# Don't add a "User-Agent" header.
+set user_agent=no
+# Virtual lines to pad blank lines in the pager.
+set tilde=yes
+# Editor invoked by ~v in the builtin editor.
+set visual=vim
+# Don't ask to press a key after shell-escape
+set wait_key=no
+# Show progress when writing to a mailbox.
+set write_inc=25
+# Set temporary directory away from tmpfs
+set tmpdir=~/tmp/
+
+## Custom regular expressions:
+
+# How to display the string preceding a reply.
+set attribution="* %n <%a> [%{!%Y-%m-%d %H:%M %Z}]:"
+# How to catch quoted text.
+set quote_regexp="^([ \t]*((--|[[:alpha:]]+)?>|[%}|]))+"
+# How to identify replies in the subject.
+set reply_regexp="^((re|aw|antw|antwort|wg|betr|betreff|sv|ang|re'|re'p|re'f|réf|odp|f|for|forward|fwd|fw)([[(^]?[0-9]+[])]?)?(\\. ?)?:[ \t]*)+"
+# How to display the status line.
+set status_format="%f-%r-(%?L?%L/?%l)--{%?M?%M/?%m%?n? n:%n?%?o? o:%o?%?d? d:%d?%?t? t:%t?}-%?b?-[Inc: %b]?-%?p?-[Post: %p]?-%>-%?V?/%V/&(%s/%S)?-%P-"
+
+## Compressed folder support:
+
+# gzip
+open-hook \\.gz$ "gzip -cd %f > %t"
+close-hook \\.gz$ "gzip -c %t > %f"
+append-hook \\.gz$ "gzip -c %t >> %f"
+
+# bzip2
+open-hook \\.bz2$ "bzip2 -cd %f > %t"
+close-hook \\.bz2$ "bzip2 -c %t > %f"
+append-hook \\.bz2$ "bzip2 -c %t >> %f"
+
+## Commands:
+
+# Some people think that HTML is good for email.
+alternative_order text/plain text/enriched text/html
+
+source ~/.mutt/alias
+source ~/.mutt/auto_view
+source ~/.mutt/bind
+source ~/.mutt/color
+source ~/.mutt/folder-hook
+source ~/.mutt/header
+source ~/.mutt/macro
+source ~/.mutt/pgp
+source ~/.mutt/send-hook
+
+source ~/.mutt/mailboxes-`hostname`
+source ~/.mutt/save-hook-`hostname`
+source ~/.mutt/lists-`hostname`
+source ~/.mutt/subscribe-`hostname`

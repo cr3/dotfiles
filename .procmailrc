@@ -1,0 +1,326 @@
+# .procmailrc
+
+INCLUDERC       = "${HOME}/.procmail/variables.pm"
+
+LOGABSTRACT     = all
+LOGFILE         = "${HOME}/log/procmail.log"
+SCOREFILE       = "${HOME}/log/procmail.score"
+
+## Filter mailboxes.
+
+:0
+* MBOX ?? ^Drafts$
+{
+  # Remove Received header.
+  :0 fhw
+  * ^Received:
+  | $FORMAIL -I Received:
+
+  # For reading.
+  :0
+  draft
+}
+
+:0
+* MBOX ?? ^Sent$
+archive/outbox
+
+## Filter headers.
+
+# PGP format.
+:0
+* ! ^Content-Type: message/
+* ! ^Content-Type: multipart/
+* ! ^Content-Type: application/pgp
+{
+  :0 fbw
+  * ^-----BEGIN PGP MESSAGE-----
+  * ^-----END PGP MESSAGE-----
+  | $FORMAIL \
+    -i "Content-Type: application/pgp; format=text; x-action=encrypt"
+
+  :0 fbw
+  * ^-----BEGIN PGP SIGNED MESSAGE-----
+  * ^-----BEGIN PGP SIGNATURE-----
+  * ^-----END PGP SIGNATURE-----
+  | $FORMAIL \
+    -i "Content-Type: application/pgp-signed; format=text; x-action=sign"
+}
+
+:0 fbw
+* ^-----BEGIN PGP PUBLIC KEY BLOCK-----
+* ^-----END PGP PUBLIC KEY BLOCK-----
+| $FORMAIL -i "Content-Type: application/pgp-keys; format=text;"
+
+# Count the number of lines.
+:0
+* ! ^Lines:
+{
+  :0 B
+  * 1^1 ^.*$
+  { }
+  LINES = $=
+
+  :0 fhw
+  | $FORMAIL -a "Lines: $LINES"
+}
+
+:0 fhw
+* ^(X-)?Status:
+| $FORMAIL -I Status -I X-Status
+
+:0 fhw
+*   ^Reply-To: \/.+
+* $ ^From:.*$MATCH
+| $FORMAIL -I Reply-To
+
+## Filter channels.
+
+:0 fhw
+* ^X-Channel-Classify:
+| $FORMAIL -I X-Channel-Classify
+
+# newspipe.
+:0
+* ^X-Channel-title: \/[^\:]*
+{
+  CHANNELID=`echo $MATCH | tr '/' '_' | tr -d ' '`
+
+  :0 fhw
+  | $FORMAIL -I "X-Channel-Classify: $CHANNELID"
+}
+
+:0
+* ^X-Channel-Classify: \/.*
+{
+  LOGFILE=
+
+  # Remove X-Channel-Classify header.
+  :0 fhw
+  | $FORMAIL -I X-Channel-Classify
+
+#  PEOPLE=`grep -l BEGIN:KEYWORDS ${HOME}/people/*.txt | tr '\n' ','`
+#  INCLUDERC="${PMDIR}/people.pm"
+
+  # For reading.
+  :0
+  channel/$MATCH
+}
+
+## Filter lists.
+
+:0 fhw
+* ^X-List-Classify:
+| $FORMAIL -I X-List-Classify
+
+# Most lists - RFC2919 and some variants.
+:0 Efhw
+* ^(List-Id|X-(Mailing-)?List):.*[<]\/[^>@\.\/]*
+| $FORMAIL -I "X-List-Classify: $MATCH"
+
+# majordomo.
+:0 Efhw
+* ^Sender: owner-[^@]+@[^@\+]+
+* ^Sender: owner-\/[^@\+\.\/]+
+| $FORMAIL -I "X-List-Classify: $MATCH"
+
+# yahoo groups.
+:0 Efhw
+* ^Mailing-List: list \/[^@\.\/]+
+| $FORMAIL -I "X-List-Classify: $MATCH"
+
+# ezmlm.
+:0 E
+* ^Mailing-List: contact \/[^@\+\.\/]+
+{
+  LISTID=`echo $MATCH | $SED -e 's/-help$//'`
+
+  :0 fhw
+  | $FORMAIL -I "X-List-Classify: $LISTID"
+}
+
+:0
+* ^X-List-Classify: \/.*
+{
+  LOGFILE=
+
+  # Remove duplicate emails.
+  :0 Wh: ${PMDIR}/list/$MATCH$LOCKEXT
+  | $FORMAIL -D 8192 ${PMDIR}/list/$MATCH.cache
+
+  # Remove X-List-Classify header.
+  :0 fhw
+  | $FORMAIL -I X-List-Classify
+
+  # Mailman or ezmlm management emails should go to inbox.
+  :0
+  * 1^0 ^Message-ID: <mailman
+  * 1^0 ^Message-ID: <[0-9.]+.ezmlm-warn@
+  inbox
+
+  # Remove [listname] from the subject.
+  :0 fhw
+  | $SED -e "s/^\\(Subject:.*\\)\\[$MATCH\\]\\( \\)*/\\1/I" \
+    -e "/^Reply-To:.*$MATCH@/ d" \
+    -e "s/^Old-Reply-To:/Reply-To:/"
+
+  # Remove duplicate reply strings.
+  :0 fhw
+  * ^Subject\: *Re\: *Re\:
+  | $SED -re "s/^(Subject: *)(Re: *)(Re: *)+/\\1\\2/I"
+
+  # For reading.
+  :0
+  list/$MATCH
+}
+
+# I do not want to get my own mails bounced back
+:0
+* ^X-Launchpad-Bug:
+* ^From:.*marc.tardif@ubuntu.com
+/dev/null
+
+# Ignore bug mail for archive admin and bug status triaging
+:0
+* ^X-Launchpad-Bug:
+* ^X-Launchpad-Message-Rationale: Subscriber @(ubuntu-archive|ubuntu-qa)
+/dev/null
+
+# Adding me as an explicit subscriber or another team
+:0:
+* ^X-Launchpad-Bug:
+* ^X-Launchpad-Message-Rationale: Subscriber($| @checkbox| @launchpad)
+list/ubuntu
+
+# Bugs assigned to me
+:0:
+* ^X-Launchpad-Bug:
+* ^X-Launchpad-Message-Rationale: Assignee
+list/ubuntu
+
+# Everything else removed
+:0
+* ^X-Launchpad-Bug:
+/dev/null
+
+## Filter emails.
+
+# Whitelist.
+:0 E
+* ? ($FORMAIL -x From: | $FGREP -i -q -f ${WHITELIST})
+{
+  LOG="(whitelist) "
+
+  :0
+  inbox
+}
+
+# Blacklist.
+:0 E
+* ? ($FORMAIL -x From: | $FGREP -i -q -f ${BLACKLIST})
+{
+  LOG="(blacklist) "
+
+  :0
+  /dev/null
+}
+
+## Filter viruses.
+
+:0 fhw
+* ^X-Virus-Classify:
+| $FORMAIL -I X-Virus-Classify
+
+# KLEZ and other similar viruses.
+:0 Efhbw
+* ^Content-Type: multipart/(mixed|alternative)
+* ^Content-Type: .*(audio/x-|application|x-rasmol)
+* name=.*\.(src|com|bat|pif|lnk|exe)
+| $FORMAIL -I "X-Virus-Classify: KLEZ/YAHA/Sobig.F"
+
+# Sobig virus.
+:0 Efhw
+* ^X-MailScanner: Found to be clean
+| $FORMAIL -I "X-Virus-Classify: Sobig.F"
+
+# WIN32 Programs.
+:0 Efbw
+* ^Content-Transfer-Encoding:.*base64
+* ^TVqQAAMAAAAEAAAA//8AALg
+* 4fug4AtAnNIbg
+| $FORMAIL -I "X-Virus-Classify: win32 exe"
+
+:0
+* ^X-Virus-Classify: \/.*
+{
+  LOG="(virus) [$MATCH] "
+
+  INCLUDERC="${PMDIR}/blacklist.pm"
+}
+
+## Filter spam.
+
+:0 fhw
+* ^X-Spam-Classify:
+| $FORMAIL -I X-Spam-Classify
+
+:0 fhw
+* ^X-Spam-(Status|Level|Score|Report):
+| $SPAMASSASSIN -d
+
+# Unreadable spam.
+:0 EfHw
+* 1^0 ^\/Subject:.*=\?(.*big5|iso-2022-jp|ISO-2022-KR|euc-kr|gb2312|ks_c_5601-1987|windows-1251|windows-1256)\?
+* 1^0 ^Content-Type:.*charset="?(.*big5|iso-2022-jp|ISO-2022-KR|euc-kr|gb2312|ks_c_5601-1987|windows-1251|windows-1256)"?
+| $FORMAIL -I "X-Spam-Classify: unreadable"
+
+# Undelivered mail.
+:0 EfHBw
+* ^Subject:.*(Undeliverable|failure notice|Returned mail|Delivery (Status )?Notification|Mail System Error|Delivery fail|Undelivered Mail Returned|Mail Delivery Problem)
+* !? $FGREP -i -q -f ${WHITELIST}
+| $FORMAIL -I "X-Spam-Classify: undelivered"
+
+# Run spamassassin on messages smaller than 256Kb.
+#:0 E
+#* < 262144
+#{
+#  :0 fw
+#  | $SPAMC
+#
+#  # Note the spam level.
+#  :0 fhw
+#  * ^X-Spam-Level: \/\*\*\*\*\*.*
+#  | $FORMAIL -I "X-Spam-Classify: $MATCH"
+#
+#  # Note the spam score.
+#  :0 c
+#  {
+#    LOGFILE=
+#
+#    :0 h
+#    | $FORMAIL -c -x X-Spam-Status >> ${SCOREFILE}
+#  }
+#}
+
+:0
+* ^X-Spam-Classify: \/.*
+{
+  LOG="(spam) [$MATCH] "
+
+  # Blacklist messages containing spam.
+  :0
+  * 1^0 ! ^X-Spam-Level:
+  * 1^0   ^X-Spam-Level: \*\*\*\*\*\*\*\*\*\*
+  {
+    INCLUDERC="${PMDIR}/blacklist.pm"
+  }
+
+  :0
+  * ^X-Spam-Level: \*\*\*\*\*
+  spam
+}
+
+## Default
+
+:0
+inbox

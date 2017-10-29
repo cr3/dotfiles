@@ -1,0 +1,23 @@
+# Filename: $HOME/.mutt/header
+
+# Format of the index
+set hdr_format="%4C %Z %{%m/%d} %-15.15F (%4c) %s"
+
+# Ignore all lines by default.
+ignore *
+
+# I do want to see these fields, though!
+unignore from:
+unignore subject
+unignore to
+unignore cc
+unignore mail-followup-to
+unignore date
+unignore x-mailer
+unignore x-url
+
+# Unset previous settings
+unhdr_order *
+
+# Order I like.
+hdr_order date from subject to cc

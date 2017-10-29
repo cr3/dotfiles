@@ -1,0 +1,5 @@
+# Filename: $HOME/.mutt/save-hook-jrrr
+
+save-hook '~s "SPAM"' '=spam'
+
+save-hook '.' '=archive/inbox'

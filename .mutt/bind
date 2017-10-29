@@ -1,0 +1,17 @@
+# Filename: $HOME/.mutt/bind
+
+# Generic key bindings.
+bind generic	"\e<"	first-entry
+bind generic	"\e>"	last-entry
+
+# Specific key bindings.
+bind index	"{"	previous-thread
+bind index	"}"	next-thread
+bind index	"x"	noop
+bind index	"\ex"	exit
+bind pager	"\e<"	top
+bind pager	"\e>"	bottom
+bind pager	"{"	previous-thread
+bind pager	"}"	next-thread
+bind pager	"x"	noop
+bind pager	"\ex"	exit

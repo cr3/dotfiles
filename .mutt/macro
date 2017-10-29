@@ -1,0 +1,31 @@
+# Filename: $HOME/.mutt/macro
+
+# Alternate between aliases
+macro compose <Esc>f '<edit-from><kill-line>my_<tab>'
+
+# Simulate the old browse-url function.
+macro index \cb "<pipe-message>urlview<enter>" "Call urlview to extract URLs from a message"
+macro pager \cb "<pipe-message>urlview<enter>" "Call urlview to extract URLs from a message"
+
+# Decode attachments.
+macro index \cu "<pipe-message>uudeview -<enter>" "Call uudeview to decode attachments"
+macro pager \cu "<pipe-message>uudeview -<enter>" "Call uudeview to decode attachments"
+macro attach \cu "<pipe-message>uudeview -<enter>" "Call uudeview to decode attachments"
+
+# Retrieve messages.
+macro index G "<pipe-message>fetchmail<enter>" "Call fetchmail to retrieve messages"
+
+# Add sender to addressbook.
+macro pager A "<pipe-message>abook --add-email<enter>" "Add sender to the addressbook"
+
+# Reclassify spam and ham messages.
+macro index "S" "<pipe-message>procmail ~/.procmail/spam.pm<enter><delete-message>" "(Re)classify a message as spam"
+macro pager "S" "<pipe-message>procmail ~/.procmail/spam.pm<enter><delete-message>" "(Re)classify a message as spam"
+macro index "H" "<pipe-message>procmail ~/.procmail/ham.pm<enter><delete-message>" "(Re)classify a message as ham"
+macro pager "H" "<pipe-message>procmail ~/.procmail/ham.pm<enter><delete-message>" "(Re)classify a message as ham"
+
+# Blacklist or whitelist messages.
+macro index "B" "<pipe-message>procmail ~/.procmail/blacklist.pm<enter>" "Blacklist a message sender"
+macro pager "B" "<pipe-message>procmail ~/.procmail/blacklist.pm<enter>" "Blacklist a message sender"
+macro index "W" "<pipe-message>procmail ~/.procmail/whitelist.pm<enter>" "Whitelist a message recipient"
+macro pager "W" "<pipe-message>procmail ~/.procmail/whitelist.pm<enter>" "Whitelist a message recipient"
