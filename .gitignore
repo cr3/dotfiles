@@ -10,6 +10,7 @@ mail
 .cargo
 .docker
 .fetchmailrc
+.fortunes/*.dat
 .gem
 .ICEauthority
 .irb-history
