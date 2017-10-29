@@ -1,0 +1,59 @@
+# .remind/defs.rem
+
+################################################
+# Ensure required version of remind is used... #
+################################################
+IF version() < "03.00.19"
+  ERRMSG This file requires at least version 03.00.19 of Remind.%
+  ERRMSG This version is version [version()].
+  EXIT
+ENDIF
+
+######################################
+# Symbolic constants for weekdays... #
+######################################
+SET Sunday    0
+SET Monday    1
+SET Tuesday   2
+SET Wednesday 3
+SET Thursday  4
+SET Friday    5
+SET Saturday  6
+
+SET Sun 0
+SET Mon 1
+SET Tue 2
+SET Wed 3
+SET Thu 4
+SET Fri 5
+SET Sat 6
+
+#########################################
+# Symbolic constants for month names... #
+#########################################
+
+SET Jan 1
+SET Feb 2
+SET Mar 3
+SET Apr 4
+SET May 5
+SET Jun 6
+SET Jul 7
+SET Aug 8
+SET Sep 9
+SET Oct 10
+SET Nov 11
+SET Dec 12
+
+SET January   1
+SET February  2
+SET March     3
+SET April     4
+SET May       5
+SET June      6
+SET July      7
+SET August    8
+SET September 9
+SET October   10
+SET November  11
+SET December  12

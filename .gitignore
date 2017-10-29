@@ -24,6 +24,10 @@ mail
 .python_history
 .ratpoison_history
 .rbenv
+.remind/monthly.rem
+.remind/weekly.rem
+.remind/yearly.rem
+.rustup
 .s3cfg
 .screen
 .slrnpull

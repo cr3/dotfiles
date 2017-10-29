@@ -1,0 +1,4 @@
+INCLUDE /home/cr3/.remind/defs.rem
+INCLUDE /home/cr3/.remind/weekly.rem
+INCLUDE /home/cr3/.remind/monthly.rem
+INCLUDE /home/cr3/.remind/yearly.rem
