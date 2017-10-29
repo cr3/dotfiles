@@ -1,0 +1,47 @@
+# .moosic/config
+# This file associates filetypes with commands which play them.
+#
+# The format of this file is as follows:  Every pair of lines forms a unit.
+# The first line in a pair is a regular expression that will be matched against
+# items in the play list.  The second line in a pair is the command that will
+# be used to play any items that match the regular expression.  The name of the
+# item to be played will be appended to the end of this command, unless the
+# string "$item" occurs in the command, in which case every occurrence of
+# "$item" will be replaced with the name of the item to be played.
+#
+# The command will not be interpreted by a shell, so don't bother trying to use
+# shell variables or globbing or I/O redirection, and be mindful of how you use
+# quotes and parentheses.  If you need any of these fancy features, wrap up the
+# command in a real shell script (and remember to use an "exec" statement to
+# invoke the program that does the actual song playing, otherwise Moosic won't
+# be able to do things like stop or pause the song).
+#
+# Blank lines and lines starting with a '#' character are ignored.  Regular
+# expressions specified earlier in this file take precedence over those
+# specified later.
+ 
+(?i)^http://
+mplayer -really-quiet -cache 1024
+
+(?i)\.(asf|wma)$
+vlc --noosd --intf dummy
+
+(?i)\.midi?$
+timidity -idq
+ 
+(?i)\.(mod|xm|s3m|stm|it|mtm|669|amf)$
+mikmod -q
+ 
+(?i)\.(wav|8svx|aiff|aifc|aif|au|cdr|maud|sf|snd|voc|gsm)$
+#sox $item -t ossdsp /dev/dsp
+play $item
+ 
+(?i)\.ogg$
+ogg123 -q
+
+(?i)\.mp3$
+mpg321 -q
+#gst-launch filesrc location=$item ! decodebin ! audioconvert ! pitch pitch=0.75 ! autoaudiosink 
+
+(?i)\.spx$
+speexdec
