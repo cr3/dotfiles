@@ -1,0 +1,4 @@
+#include "XTerm"
+
+*foreground: white
+*background: black

@@ -1,0 +1,58 @@
+! Make the Alt key work properly
+XTerm.vt100.utf8:		1
+XTerm.vt100.eightBitInput:	false
+XTerm.vt100.metaSendsEscape:	true
+XTerm.vt100.locale:		UTF-8
+
+! Do not copy trailing spaces.
+XTerm*TrimSelection:		true
+
+! Highlight on double-click
+XTerm*charClass:		33:48,37:48,45-47:48,64:48
+XTerm*cutNewline:		false
+XTerm*cutToBeginningOfLine:	false
+
+! Color and font selection.
+XTerm.vt100.background:		white
+XTerm.vt100.foreground:		black
+XTerm.vt100.font:		-misc-fixed-medium-r-semicondensed-*-*-120-*-*-*-*-iso10646-1
+XTerm.vt100.boldFont:		-misc-fixed-bold-r-semicondensed-*-*-120-*-*-*-*-iso10646-1
+XTerm.vt100.boldMode:		false
+
+! Muted colors.
+XTerm.vt100.color0:		black
+XTerm.vt100.color1:		#CC3333
+XTerm.vt100.color2:		#33CC33
+XTerm.vt100.color3:		#CCCC33
+XTerm.vt100.color4:		#3333CC
+XTerm.vt100.color5:		#CC33CC
+XTerm.vt100.color6:		#33CCCC
+XTerm.vt100.color7:		#CCCCCC
+XTerm.vt100.color8:		#666666
+XTerm.vt100.color9:		#FF6666
+XTerm.vt100.color10:		#66FF66
+XTerm.vt100.color11:		#FFFF66
+XTerm.vt100.color12:		#6666FF
+XTerm.vt100.color13:		#FF66FF
+XTerm.vt100.color14:		#66FFFF
+XTerm.vt100.color15:		white
+XTerm.vt100.colorUL:		#66FF66
+XTerm.vt100.colorBD:		#6666FF
+
+angband*angband*font:		8x13
+angband*angband*geometry:	+300+220
+angband*recall*font:		7x13
+angband*recall*geometry:	80x15+460+0
+angband*choice*font:		7x13
+angband*choice*geometry:	+0+440
+angband*mirror*font:		7x13
+angband*mirror*geometry:	80x15+460+590
+angband*color6:			#3070f0
+angband*color7:			#907027
+angband*term-1*font:		6x12
+angband*term-2*font:		7x13
+angband*term-3*font:		-misc-fixed-medium-r-*-*-6-*-*-*-*-*-*-*
+angband*term-4*font:		5x7
+angband*term-5*font:		7x13
+angband*term-6*font:		6x9
+angband*term-7*font:		5x7
