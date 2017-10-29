@@ -2,6 +2,7 @@
 *~
 log
 mail
+sites
 .anacron
 .ansible
 .bazaar/lock
