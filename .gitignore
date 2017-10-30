@@ -5,6 +5,7 @@ mail
 R
 sites
 VirtualBox VMs
+.abook/addressbook
 .anacron
 .ansible
 .bazaar/lock
