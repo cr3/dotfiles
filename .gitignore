@@ -1,9 +1,13 @@
 *.pyc
 *~
+doc
+lib
 log
 mail
+notes
 R
 sites
+src
 VirtualBox VMs
 .abook/addressbook
 .anacron
