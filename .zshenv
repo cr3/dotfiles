@@ -32,6 +32,12 @@ export PATH=$PYENV_ROOT/bin:$PATH
 eval "$(pyenv init -)"
 
 ##
+# Python variables
+if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  . "${VIRTUAL_ENV}/bin/activate"
+fi
+
+##
 # Rbenv variables.
 export RBENV_ROOT=/home/dev/src/rbenv
 export PATH=$RBENV_ROOT/bin:$PATH
