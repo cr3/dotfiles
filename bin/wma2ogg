@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Convert a WMA file to OGG format.
+
+# man mplayer for more information
+MPLAYER_CMD="mplayer -ao pcm:waveheader -vc dummy -vo null"
+
+# man oggenc for more information
+OGGENC_CMD="oggenc -b 256 -q 8 -Q"
+
+# check command line arguments
+WMA_FILE=$1
+if ! test -n "$WMA_FILE"; then
+  PROG_NAME=`basename $0`
+  echo "Usage: $PROG_NAME WMA_FILE [OGG_FILE]"
+  exit 1
+fi
+
+if ! test -r "$WMA_FILE"; then
+  echo "Unable to read file: $WMA_FILE"
+  exit 1
+fi
+
+OGG_FILE=$2
+if ! test -n "$OGG_FILE"; then
+  OGG_FILE=`echo "$WMA_FILE" | sed 's/\.wma$/.ogg/'`
+fi
+
+# convert WMA_FILE to OGG_FILE
+$MPLAYER_CMD -ao pcm:file=/dev/stdout $WMA_FILE \
+| $OGGENC_CMD -r - -o "$OGG_FILE"

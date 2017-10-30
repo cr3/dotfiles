@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Convert MIDI file to OGG format.
+
+# man timidity for more information
+TIMIDITY_CMD="timidity -a -Ew -Ep -Ev -Es -Et -Eo -idq -Owsl"
+
+# man oggenc for more information
+OGGENC_CMD="oggenc -b 256 -q 8 -Q"
+
+# check command line arguments
+MIDI_FILE=$1
+if ! test -n "$MIDI_FILE"; then
+  PROG_NAME=`basename $0`
+  echo "Usage: $PROG_NAME MIDI_FILE [OGG_FILE]"
+  exit 1
+fi
+
+if ! test -r "$MIDI_FILE"; then
+  echo "Unable to read file: $MIDI_FILE"
+  exit 1
+fi
+
+OGG_FILE=$2
+if ! test -n "$OGG_FILE"; then
+  OGG_FILE=`echo "$MIDI_FILE" | sed 's/\.midi\?$/.ogg/'`
+fi
+
+# convert MIDI_FILE to OGG_FILE
+$TIMIDITY_CMD "$MIDI_FILE" -o - \
+| $OGGENC_CMD -r - -o "$OGG_FILE"

@@ -1,0 +1,37 @@
+#! /usr/bin/env perl
+
+# This little script simply accumulates spam stats.
+
+use lib qw(/home/cr3/lib/perl);
+
+use strict;
+
+use Statistics::Descriptive;
+
+my %h;
+$h{'spam'} = Statistics::Descriptive::Sparse->new();
+$h{'ham'}  = Statistics::Descriptive::Sparse->new();
+$h{'both'} = Statistics::Descriptive::Sparse->new();
+
+while (chomp(my $line = <>)) {
+  my ($isspam, $hits);
+  $line =~ /^ (Yes|No),/ and $isspam = $1;
+  $line =~ /score=([0-9.-]+) / and $hits = $1;
+  if ($isspam eq "Yes") {
+    $h{'spam'}->add_data($hits);
+  } else {
+    $h{'ham'}->add_data($hits);
+  }
+  $h{'both'}->add_data($hits);
+}
+
+foreach my $key (qw(ham spam both)) {
+  print "$key:\n";
+  print "Cnt: ", $h{$key}->count(), "\n";
+  print "Max: ", $h{$key}->max(), "\n";
+  print "Avg: ", $h{$key}->mean(), "\n";
+  print "Dev: ", $h{$key}->standard_deviation(), "\n";
+  print "--\n";
+}
+
+print "\n";

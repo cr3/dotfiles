@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# Script to rotate and archive mail.
+
+MAIL_DIR=/home/cr3/mail
+if [ ! -d $MAIL_DIR ]; then
+  echo "Error: mail directory not found: $MAIL_DIR" >&2
+  exit 1
+fi
+
+CHANNEL_DIR=$MAIL_DIR/channel
+if [ ! -d $CHANNEL_DIR ]; then
+  echo "Error: channel directory not found: $CHANNEL_DIR" >&2
+  exit 1
+fi
+
+LIST_DIR=$MAIL_DIR/list
+if [ ! -d $LIST_DIR ]; then
+  echo "Error: list directory not found: $LIST_DIR" >&2
+  exit 1
+fi
+
+# Rotate channels that are older than 1 months.
+CHANNEL_MAILBOXES=`find $CHANNEL_DIR -type f`
+for CHANNEL_MAILBOX in $CHANNEL_MAILBOXES; do
+  archivemail \
+    --delete \
+    --date=`date -d '1 month ago' +"%Y-%m-01"` \
+    $CHANNEL_MAILBOX
+done
+
+# Rotate lists that are older than 2 months.
+LIST_MAILBOXES=`find $LIST_DIR -type f`
+for LIST_MAILBOX in $LIST_MAILBOXES; do
+  archivemail \
+    --delete \
+    --date=`date -d '2 months ago' +"%Y-%m-01"` \
+    $LIST_MAILBOX
+done
+
+# Archive messages that are older than 1 month.
+ARCHIVE_DIR=$MAIL_DIR/archive
+if [ ! -d $ARCHIVE_DIR ]; then
+  echo "Error: archive directory not found: $ARCHIVE_DIR" >&2
+  exit 1
+fi
+
+ARCHIVE_MAILBOXES=`find $ARCHIVE_DIR -type f ! -name '*.gz'`
+for ARCHIVE_MAILBOX in $ARCHIVE_MAILBOXES; do
+  archivemail \
+    --output-dir=$ARCHIVE_DIR \
+    --date=`date -d '1 month ago' +"%Y-%m-01"` \
+    --suffix=`date -d '2 months ago' +"-%Y-%m"` \
+    $ARCHIVE_MAILBOX
+done

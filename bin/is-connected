@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Check if system is connected.
+
+# man ping for more information
+PING_CMD="ping -qc1 -i1"
+
+HOST="interunion.ca"
+
+COUNT=`$PING_CMD "$HOST" 2>/dev/null | awk '/transmitted/ { print $4 }'`
+if test "x$COUNT" != "x1"; then
+  exit 1
+fi

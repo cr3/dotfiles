@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+import sys
+
+import boto.s3
+import boto.s3.bucket
+import boto.s3.connection
+
+
+S3_REGION = "us-west-2"
+S3_BUCKET = "libagent.immun.io"
+
+if len(sys.argv) != 3:
+    sys.exit("USAGE: %s <branch> <build>" % sys.argv[0])
+
+branch = sys.argv[1]
+build = sys.argv[2]
+
+s3 = boto.s3.connect_to_region(
+    S3_REGION,
+    calling_format=boto.s3.connection.OrdinaryCallingFormat(),
+    is_secure=True
+)
+
+bucket = boto.s3.bucket.Bucket(connection=s3, name=S3_BUCKET)
+
+key = bucket.get_key("libagent/%s/%s/libagent.tar.gz" % (branch, build), validate=True)
+
+if key is None:
+    sys.exit("'%s/%s' does not exist in S3" % (branch, build))
+
+url = key.generate_url(60 * 60 * 24)
+
+print(url)

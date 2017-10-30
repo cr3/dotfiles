@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# -U option basically means "terminal does not have UTF-8 support"
+if test "$1" == "-U"; then
+  unset LC_CTYPE
+fi
+
+# Bring in my ssh-agent, so screen will have it available in all windows.
+keychain --nocolor --quiet ~/.ssh/id_rsa
+. ~/.keychain/`hostname`-sh
+
+# Not a standard environment variable, but I need it for host-dependent
+# decisions in .screenrc.
+export HOST=`hostname`
+
+# Record $DISPLAY for later use.
+if test "$SSH_CLIENT" != ""; then
+  IDXHOST=`echo $SSH_CLIENT | sed 's/ .*//'`
+else
+  IDXHOST=`hostname -i | sed 's/ //g'`
+fi
+
+mkdir -p ~/.screen/$IDXHOST/
+if test "$DISPLAY" != ""; then
+  echo $DISPLAY > ~/.screen/$IDXHOST/display
+fi
+
+# multi-attach to main session, creating it if necessary.  exec to save a
+# process.
+exec screen -S main -xRR

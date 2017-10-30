@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Convert a MP3 file to OGG format.
+
+# man mpg321 for more information
+MPG321_CMD="mpg321 -q"
+
+# man oggenc for more information
+OGGENC_CMD="oggenc -b 256 -q 8 -Q"
+
+# check command line arguments
+MP3_FILE=$1
+if ! test -n "$MP3_FILE"; then
+  PROG_NAME=`basename $0`
+  echo "Usage: $PROG_NAME MP3_FILE [OGG_FILE]"
+  exit 1
+fi
+
+if ! test -r "$MP3_FILE"; then
+  echo "Unable to read file: $MP3_FILE"
+  exit 1
+fi
+
+OGG_FILE=$2
+if ! test -n "$OGG_FILE"; then
+  OGG_FILE=`echo "$MP3_FILE" | sed 's/\.mp3$/.ogg/'`
+fi
+
+# convert MP3_FILE to OGG_FILE
+$MPG321_CMD -s "$MP3_FILE" \
+| $OGGENC_CMD -r - -o "$OGG_FILE"
