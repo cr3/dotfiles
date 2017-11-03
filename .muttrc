@@ -22,7 +22,7 @@ set delete=yes
 # Don't edit headers because it affects send hooks.
 set edit_headers=no
 # Editor to use when composing messages.
-set editor="vim -u ~/.mutt/vimrc"
+set editor="vim -c 'set textwidth=75'"
 # If set to "yes" outbound PGP emails will be saved unsigned and unencrypted.
 set fcc_clear=no
 # Weed and MIME decode forwaded messages.
