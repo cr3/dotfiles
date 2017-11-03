@@ -63,15 +63,24 @@ set wim=longest,list
 " Enable plugins
 filetype plugin on
 
-" TeX configuration
-let g:Tex_AutoFolding = 0
-let g:Tex_UseMakefile = 0
-
 " Remap <leader> from / to ,
 let mapleader=","
 
 " Clear the search buffer when hitting return
 nnoremap <CR> :nohlsearch<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CUSTOM AUTOCMDS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup vimrcEx
+  " Clear all autocmds in the group
+  autocmd!
+
+  autocmd! FileType javascript set sw=2 sts=2 expandtab autoindent smartindent nocindent
+  autocmd FileType python set sw=4 sts=4 et
+  autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set ai sw=2 sts=2 et
+  autocmd FileType text setlocal textwidth=78
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
