@@ -66,6 +66,11 @@ export ECLIPSE_HOME=/home/dev/java-oxygen/eclipse
 export PATH=$ECLIPSE_HOME:$PATH
 
 ##
+# Firefox variables.
+export FIREFOX_HOME=/home/dev/firefox
+export PATH=$FIREFOX_HOME:$PATH
+
+##
 # AWS variables.
 . ${HOME}/.zsh/aws.zsh
 
