@@ -62,7 +62,7 @@ export PATH=$M2:$PATH
 
 ##
 # Eclipse variables.
-export ECLIPSE_HOME=/home/dev/java-neon/eclipse
+export ECLIPSE_HOME=/home/dev/java-oxygen/eclipse
 export PATH=$ECLIPSE_HOME:$PATH
 
 ##
