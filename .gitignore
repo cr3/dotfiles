@@ -68,6 +68,7 @@
 /.spamassassin/bayes_seen
 /.spamassassin/bayes_toks
 /.ssh
+/.thumbnails
 /.tox
 /.travis
 /.vault
