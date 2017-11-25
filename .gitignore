@@ -67,7 +67,6 @@
 /.remind/yearly.rem
 /.rustup
 /.s3cfg
-/.screen
 /.slrnpull
 /.spamassassin/bayes_journal
 /.spamassassin/bayes_seen
