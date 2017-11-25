@@ -25,7 +25,6 @@
 /.compiz
 /.config
 /.dbus
-/.docker
 /.eclim
 /.eclipse
 /.fortunes/*.dat
