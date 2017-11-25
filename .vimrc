@@ -76,9 +76,10 @@ augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
 
-  autocmd! FileType javascript set sw=2 sts=2 expandtab autoindent smartindent nocindent
-  autocmd FileType python set sw=4 sts=4 et
-  autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set ai sw=2 sts=2 et
+  autocmd! FileType javascript set sw=2 sts=2 autoindent expandtab nocindent smartindent
+  autocmd FileType java set sw=4 sts=4 expandtab
+  autocmd FileType python set sw=4 sts=4 expandtab
+  autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set sw=2 sts=2 autoindent expandtab
   autocmd FileType text setlocal textwidth=78
 augroup END
 
@@ -111,6 +112,7 @@ map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 function! MapCR()
   nnoremap <cr> :call RunTestFile()<cr>
 endfunction
@@ -119,19 +121,22 @@ nnoremap <leader>T :call RunNearestTest()<cr>
 nnoremap <leader>a :call RunTests('')<cr>
 
 function! RunTestFile(...)
-    if a:0
-        let command_suffix = ""
-    else
-        let command_suffix = ""
-    endif
-
     " Are we in a test file?
-    let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\|test_.*\.py\|_test.py\)$') != -1
+    let rb_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\)$') != -1
+    let py_test_file = match(expand("%"), '\(test_.*\.py\|_test.py\)$') != -1
 
     " Run the tests for the previously-marked file (or the current file if
     " it's a test).
-    if in_test_file
+    if rb_test_file
+        if a:0
+            let command_suffix = a:1
+        else
+            let command_suffix = ""
+        endif
+
         call SetTestFile(command_suffix)
+    elseif py_test_file
+        call SetTestFile("")
     elseif !exists("t:grb_test_file")
         return
     end
