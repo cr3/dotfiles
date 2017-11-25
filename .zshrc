@@ -56,6 +56,10 @@ fi
 # Use vim instead of vi.
 alias vi='vim'
 
+# Use dotfiles to use ~/.dotfiles
+alias dotfiles='git --git-dir=~/.dotfiles --work-tree=~'
+compdef dotfiles=git
+
 ##
 # Parameters.  See zshparam(1)
 
