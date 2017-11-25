@@ -4,3 +4,6 @@
 [submodule ".vim/bundle/vim-fugitive"]
 	path = .vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule "/home/cr3/.vim/bundle/vim-eclim"]
+	path = /home/cr3/.vim/bundle/vim-eclim
+	url = https://github.com/dansomething/vim-eclim

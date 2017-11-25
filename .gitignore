@@ -2,6 +2,7 @@
 *.swp
 *~
 /doc
+/eclipse-workspace
 /lib
 /log
 /mail
@@ -10,6 +11,7 @@
 /sites
 /src
 /VirtualBox VMs
+/workbench.xmi
 /.abook/addressbook
 /.anacron
 /.ansible
@@ -24,6 +26,8 @@
 /.config
 /.dbus
 /.docker
+/.eclim
+/.eclipse
 /.fetchmailrc
 /.fortunes/*.dat
 /.gconf
@@ -49,6 +53,7 @@
 /.msmtprc
 /.multirust
 /.oracle_jre_usage
+/.p2
 /.pip
 /.procmail/blacklist
 /.procmail/list
@@ -70,6 +75,7 @@
 /.spamassassin/bayes_toks
 /.ssh
 /.thumbnails
+/.tooling
 /.tox
 /.travis
 /.vault
