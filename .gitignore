@@ -28,7 +28,6 @@
 /.docker
 /.eclim
 /.eclipse
-/.fetchmailrc
 /.fortunes/*.dat
 /.gconf
 /.gem
