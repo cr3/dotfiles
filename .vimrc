@@ -76,6 +76,7 @@ augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
 
+  autocmd FileType haskell set sw=2 sts=2 expandtab
   autocmd FileType javascript set sw=2 sts=2 autoindent expandtab nocindent smartindent
   autocmd FileType java set sw=4 sts=4 expandtab
   autocmd FileType python set sw=4 sts=4 expandtab
@@ -121,10 +122,13 @@ nnoremap <leader>a :call RunTests('')<cr>
 function! RunTestFile(...)
     " Are we in a test file?
     let py_test_file = match(expand("%"), '\(test_.*\.py\|_test.py\)$') != -1
+    let hs_test_file = match(expand("%"), '\(Spec.hs\)$') != -1
 
     " Run the tests for the previously-marked file (or the current file if
     " it's a test).
     if py_test_file
+        call SetTestFile("")
+    elseif hs_test_file
         call SetTestFile("")
     elseif !exists("t:grb_test_file")
         return
@@ -161,6 +165,10 @@ function! RunTests(filename)
         exec "!tox -- -s -v test"
       elseif strlen(glob("tests/**/*.py"))
         exec "!tox -- -s -v tests"
+      end
+    elseif strlen(glob("**/*Spec.hs"))
+      if strlen(a:filename)
+        exec ":!runghc " . a:filename
       end
     end
 endfunction
