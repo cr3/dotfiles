@@ -3,9 +3,3 @@
     mailstat -k /home/cr3/log/procmail.log
   endscript
 }
-
-/home/cr3/log/procmail.score {
-  prerotate
-    spamstat /home/cr3/log/procmail.score
-  endscript
-}
