@@ -79,7 +79,6 @@ augroup vimrcEx
   autocmd! FileType javascript set sw=2 sts=2 autoindent expandtab nocindent smartindent
   autocmd FileType java set sw=4 sts=4 expandtab
   autocmd FileType python set sw=4 sts=4 expandtab
-  autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set sw=2 sts=2 autoindent expandtab
   autocmd FileType text setlocal textwidth=78
 augroup END
 
@@ -122,20 +121,11 @@ nnoremap <leader>a :call RunTests('')<cr>
 
 function! RunTestFile(...)
     " Are we in a test file?
-    let rb_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\)$') != -1
     let py_test_file = match(expand("%"), '\(test_.*\.py\|_test.py\)$') != -1
 
     " Run the tests for the previously-marked file (or the current file if
     " it's a test).
-    if rb_test_file
-        if a:0
-            let command_suffix = a:1
-        else
-            let command_suffix = ""
-        endif
-
-        call SetTestFile(command_suffix)
-    elseif py_test_file
+    if py_test_file
         call SetTestFile("")
     elseif !exists("t:grb_test_file")
         return
@@ -164,23 +154,6 @@ function! RunTests(filename)
     " Project-specific test script
     elseif filereadable("script/test")
         exec ":!script/test " . a:filename
-    " Fall back to the .test-commands pipe if available, assuming someone
-    " is reading the other side and running the commands
-    elseif filewritable(".test-commands")
-      let cmd = 'rspec --color --format progress --require "~/lib/vim_rspec_formatter" --format VimFormatter --out tmp/quickfix'
-      exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
-
-      " Write an empty string to block until the command completes
-      sleep 100m " milliseconds
-      :!echo > .test-commands
-      redraw!
-    " Fall back to a blocking test run with Bundler
-    elseif filereadable("bin/rspec")
-      exec ":!bin/rspec --color " . a:filename
-    elseif filereadable("Gemfile") && strlen(glob("spec/**/*.rb"))
-      exec ":!bundle exec rspec --color " . a:filename
-    elseif filereadable("Gemfile") && strlen(glob("test/**/*.rb"))
-      exec ":!bin/rails test " . a:filename
     " If we see python-looking tests, assume they should be run with py.test
     elseif strlen(glob("test/**/*.py") . glob("tests/**/*.py"))
       if strlen(a:filename)

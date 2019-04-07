@@ -16,8 +16,6 @@
 /.ansible
 /.bazaar/lock
 /.bitlbee
-/.bundle
-/.byebug_hist
 /.cache
 /.cargo
 /.certs/*.0
@@ -26,7 +24,6 @@
 /.dbus
 /.dotfiles
 /.gconf
-/.gem
 /.gimp-2.8
 /.gnome2
 /.gnupg
@@ -56,7 +53,6 @@
 /.psql_history
 /.python-eggs
 /.python_history
-/.rbenv
 /.remind/monthly.rem
 /.remind/weekly.rem
 /.remind/yearly.rem

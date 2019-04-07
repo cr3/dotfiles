@@ -34,17 +34,6 @@ if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
 fi
 
 ##
-# Rbenv variables.
-export RBENV_ROOT=/home/dev/src/rbenv
-export PATH=$RBENV_ROOT/bin:$PATH
-eval "$(rbenv init -)"
-
-##
-# Ruby-build variables.
-export RUBY_BUILD_ROOT=$RBENV_ROOT/plugins/ruby-build
-export PATH=$RUBY_BUILD_ROOT/bin:$PATH
-
-##
 ## Rust variables.
 export CARGO_ROOT=$HOME/.cargo
 export PATH=$CARGO_ROOT/bin:$PATH
