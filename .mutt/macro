@@ -18,12 +18,6 @@ macro index G "<pipe-message>fetchmail<enter>" "Call fetchmail to retrieve messa
 # Add sender to addressbook.
 macro pager A "<pipe-message>abook --add-email<enter>" "Add sender to the addressbook"
 
-# Reclassify spam and ham messages.
-macro index "S" "<pipe-message>procmail ~/.procmail/spam.pm<enter><delete-message>" "(Re)classify a message as spam"
-macro pager "S" "<pipe-message>procmail ~/.procmail/spam.pm<enter><delete-message>" "(Re)classify a message as spam"
-macro index "H" "<pipe-message>procmail ~/.procmail/ham.pm<enter><delete-message>" "(Re)classify a message as ham"
-macro pager "H" "<pipe-message>procmail ~/.procmail/ham.pm<enter><delete-message>" "(Re)classify a message as ham"
-
 # Blacklist or whitelist messages.
 macro index "B" "<pipe-message>procmail ~/.procmail/blacklist.pm<enter>" "Blacklist a message sender"
 macro pager "B" "<pipe-message>procmail ~/.procmail/blacklist.pm<enter>" "Blacklist a message sender"

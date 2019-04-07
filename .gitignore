@@ -60,9 +60,6 @@
 /.rustup
 /.s3cfg
 /.slrnpull
-/.spamassassin/bayes_journal
-/.spamassassin/bayes_seen
-/.spamassassin/bayes_toks
 /.ssh
 /.sudo_as_admin_successful
 /.thumbnails

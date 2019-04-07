@@ -258,68 +258,6 @@ list/ubuntu
   INCLUDERC="${PMDIR}/blacklist.pm"
 }
 
-## Filter spam.
-
-:0 fhw
-* ^X-Spam-Classify:
-| $FORMAIL -I X-Spam-Classify
-
-:0 fhw
-* ^X-Spam-(Status|Level|Score|Report):
-| $SPAMASSASSIN -d
-
-# Unreadable spam.
-:0 EfHw
-* 1^0 ^\/Subject:.*=\?(.*big5|iso-2022-jp|ISO-2022-KR|euc-kr|gb2312|ks_c_5601-1987|windows-1251|windows-1256)\?
-* 1^0 ^Content-Type:.*charset="?(.*big5|iso-2022-jp|ISO-2022-KR|euc-kr|gb2312|ks_c_5601-1987|windows-1251|windows-1256)"?
-| $FORMAIL -I "X-Spam-Classify: unreadable"
-
-# Undelivered mail.
-:0 EfHBw
-* ^Subject:.*(Undeliverable|failure notice|Returned mail|Delivery (Status )?Notification|Mail System Error|Delivery fail|Undelivered Mail Returned|Mail Delivery Problem)
-* !? $FGREP -i -q -f ${WHITELIST}
-| $FORMAIL -I "X-Spam-Classify: undelivered"
-
-# Run spamassassin on messages smaller than 256Kb.
-#:0 E
-#* < 262144
-#{
-#  :0 fw
-#  | $SPAMC
-#
-#  # Note the spam level.
-#  :0 fhw
-#  * ^X-Spam-Level: \/\*\*\*\*\*.*
-#  | $FORMAIL -I "X-Spam-Classify: $MATCH"
-#
-#  # Note the spam score.
-#  :0 c
-#  {
-#    LOGFILE=
-#
-#    :0 h
-#    | $FORMAIL -c -x X-Spam-Status >> ${SCOREFILE}
-#  }
-#}
-
-:0
-* ^X-Spam-Classify: \/.*
-{
-  LOG="(spam) [$MATCH] "
-
-  # Blacklist messages containing spam.
-  :0
-  * 1^0 ! ^X-Spam-Level:
-  * 1^0   ^X-Spam-Level: \*\*\*\*\*\*\*\*\*\*
-  {
-    INCLUDERC="${PMDIR}/blacklist.pm"
-  }
-
-  :0
-  * ^X-Spam-Level: \*\*\*\*\*
-  spam
-}
-
 ## Default
 
 :0

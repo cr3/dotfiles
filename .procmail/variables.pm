@@ -21,9 +21,6 @@ TR		= ${TR:-"tr"}
 FORMAIL		= ${FORMAIL:-"formail"}
 PROCMAIL	= ${PROCMAIL:-"procmail"}
 
-SPAMASSASSIN	= ${SPAMASSASSIN:-"spamassassin"}
-SPAMC		= ${SPAMC:-"spamc"}
-
 MSMTP		= ${MSMTP:-"msmtp"}
 
 ## Emails
