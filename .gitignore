@@ -31,12 +31,10 @@
 /.ICEauthority
 /.irb-history
 /.irssi/config.autosave
-/.java
 /.keybase
 /.keychain
 /.lesshst
 /.local
-/.m2
 /.macromedia
 /.mairixdb
 /.moosic/player_log
@@ -45,7 +43,6 @@
 /.mozilla
 /.msmtprc
 /.multirust
-/.oracle_jre_usage
 /.p2
 /.pip
 /.procmail/blacklist
@@ -62,7 +59,6 @@
 /.ssh
 /.sudo_as_admin_successful
 /.thumbnails
-/.tooling
 /.tox
 /.travis
 /.vault
