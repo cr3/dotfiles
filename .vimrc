@@ -104,9 +104,8 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
-" Command-T
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
+" ctrlp
+map <leader>f :CtrlP<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
