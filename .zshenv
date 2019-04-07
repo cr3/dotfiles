@@ -22,10 +22,6 @@ export PERL5LIB="${HOME}/lib/perl"
 export PYTHONPATH="${HOME}/lib/python"
 
 ##
-# Grep variables.
-export GREP_OPTIONS="--exclude-dir=.svn --binary-files=without-match"
-
-##
 # Pyenv variables.
 export PYENV_ROOT=/home/dev/src/pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
