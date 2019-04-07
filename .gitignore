@@ -22,6 +22,7 @@
 /.compiz
 /.config
 /.dbus
+/.docker
 /.dotfiles
 /.gconf
 /.gimp-2.8
