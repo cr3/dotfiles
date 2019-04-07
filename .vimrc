@@ -76,7 +76,7 @@ augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
 
-  autocmd! FileType javascript set sw=2 sts=2 autoindent expandtab nocindent smartindent
+  autocmd FileType javascript set sw=2 sts=2 autoindent expandtab nocindent smartindent
   autocmd FileType java set sw=4 sts=4 expandtab
   autocmd FileType python set sw=4 sts=4 expandtab
   autocmd FileType text setlocal textwidth=78
@@ -154,14 +154,14 @@ function! RunTests(filename)
     " Project-specific test script
     elseif filereadable("script/test")
         exec ":!script/test " . a:filename
-    " If we see python-looking tests, assume they should be run with py.test
+    " If we see python-looking tests, assume they should be run with tox
     elseif strlen(glob("test/**/*.py") . glob("tests/**/*.py"))
       if strlen(a:filename)
-        exec "!py.test -s -v " . a:filename
+        exec "!tox -- -s -v " . a:filename
       elseif strlen(glob("test/**/*.py"))
-        exec "!py.test -s -v test"
+        exec "!tox -- -s -v test"
       elseif strlen(glob("tests/**/*.py"))
-        exec "!py.test -s -v tests"
+        exec "!tox -- -s -v tests"
       end
     end
 endfunction
