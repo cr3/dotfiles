@@ -2,7 +2,6 @@
 
 # Rarely used windows
 screen -t 'ircd'   10 bitlbee -D -i 127.0.0.1 -p 16667 -n -v -d ${HOME}/.bitlbee
-screen -t 'eclimd' 11 zsh -c 'DISPLAY=:0.0 eclimd'
 
 echo 'Waiting for daemons to start...'
 sleep 2

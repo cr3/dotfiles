@@ -57,11 +57,6 @@ export MAVEN_OPTS="-Xms256m -Xmx512m"
 export PATH=$M2:$PATH
 
 ##
-# Eclipse variables.
-export ECLIPSE_HOME=/home/dev/java-oxygen/eclipse
-export PATH=$ECLIPSE_HOME:$PATH
-
-##
 # Firefox variables.
 export FIREFOX_HOME=/home/dev/firefox
 export PATH=$FIREFOX_HOME:$PATH

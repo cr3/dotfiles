@@ -2,7 +2,6 @@
 *.swp
 *~
 /doc
-/eclipse-workspace
 /lib
 /log
 /mail
@@ -26,8 +25,6 @@
 /.config
 /.dbus
 /.dotfiles
-/.eclim
-/.eclipse
 /.gconf
 /.gem
 /.gimp-2.8
