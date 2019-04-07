@@ -1,0 +1,10 @@
+snippet #!
+	#!/usr/bin/env python
+
+snippet imp
+	import ${1:module}
+
+snippet attr.s
+	@attr.s(frozen=True, slots=True)
+	class ${1:class_name}:
+	    """${0:Description}"""
