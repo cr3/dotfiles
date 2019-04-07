@@ -28,7 +28,6 @@
 /.dotfiles
 /.eclim
 /.eclipse
-/.fortunes/*.dat
 /.gconf
 /.gem
 /.gimp-2.8
