@@ -63,6 +63,7 @@
 /.spamassassin/bayes_seen
 /.spamassassin/bayes_toks
 /.ssh
+/.sudo_as_admin_successful
 /.thumbnails
 /.tooling
 /.tox
