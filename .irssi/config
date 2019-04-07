@@ -30,8 +30,9 @@ chatnets = {
 
 channels = (
   { name = "&bitlbee"; chatnet = "BitlBee"; autojoin = "Yes"; },
-  { name = "#jenkins"; chatnet = "Freenode"; autojoin = "yes"; },
-  { name = "#pylib"; chatnet = "Freenode"; autojoin = "yes"; }
+  { name = "#haskell"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#pylib"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#python-testing"; chatnet = "Freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -282,6 +283,12 @@ windows = {
         chat_type = "IRC";
         name = "#pylib";
         tag = "Freenode";
+      },
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#python-testing";
+        tag = "Freenode";
       }
     );
   };
@@ -290,7 +297,7 @@ windows = {
       {
         type = "CHANNEL";
         chat_type = "IRC";
-        name = "#jenkins";
+        name = "#haskell";
         tag = "Freenode";
       }
     );
