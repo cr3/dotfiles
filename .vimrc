@@ -15,7 +15,7 @@ set autoindent
 " Number of lines remembered.
 set history=1000
 
-" Pairs that match the "%" command.
+" Pairs that match the '%' command.
 set matchpairs+=<:>
 
 " No window title.
@@ -41,7 +41,7 @@ set nojoinspaces
 set shell=zsh
 
 " Enable highlighting when the terminal has colors.
-if &t_Co > 2 || has("gui_running")
+if &t_Co > 2 || has('gui_running')
   " Highlight syntax.
   syntax on
 
@@ -54,7 +54,7 @@ inoremap <Nul> <C-x><C-o>
 
 " Show pattern as it is typed.
 "set incsearch
-set wim=longest,list
+set wildmode=longest,list
 
 "set list
 "set listchars=tab:>.,trail:-
@@ -64,7 +64,7 @@ set wim=longest,list
 filetype plugin on
 
 " Remap <leader> from / to ,
-let mapleader=","
+let g:mapleader=','
 
 " Clear the search buffer when hitting return
 nnoremap <CR> :nohlsearch<cr>
@@ -112,33 +112,29 @@ map <leader>f :CtrlP<cr>
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function! MapCR()
-  nnoremap <cr> :call RunTestFile()<cr>
-endfunction
-call MapCR()
-nnoremap <leader>T :call RunNearestTest()<cr>
-nnoremap <leader>a :call RunTests('')<cr>
+nnoremap <leader>t :call RunNearestTest()<cr>
+nnoremap <leader>T :call RunTests('')<cr>
 
 function! RunTestFile(...)
     " Are we in a test file?
-    let py_test_file = match(expand("%"), '\(test_.*\.py\|_test.py\)$') != -1
-    let hs_test_file = match(expand("%"), '\(Spec.hs\)$') != -1
+    let l:py_test_file = match(expand('%'), '\(test_.*\.py\|_test.py\)$') != -1
+    let l:hs_test_file = match(expand('%'), '\(Spec.hs\)$') != -1
 
     " Run the tests for the previously-marked file (or the current file if
     " it's a test).
-    if py_test_file
-        call SetTestFile("")
-    elseif hs_test_file
-        call SetTestFile("")
-    elseif !exists("t:grb_test_file")
+    if l:py_test_file
+        call SetTestFile('')
+    elseif l:hs_test_file
+        call SetTestFile('')
+    elseif !exists('t:grb_test_file')
         return
     end
     call RunTests(t:grb_test_file)
 endfunction
 
 function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number)
+    let l:spec_line_number = line('.')
+    call RunTestFile(':' . l:spec_line_number)
 endfunction
 
 function! SetTestFile(command_suffix)
@@ -148,27 +144,27 @@ endfunction
 
 function! RunTests(filename)
     " Write the file and run tests for the given filename
-    if expand("%") != ""
+    if expand('%') !=? ''
       :w
     end
     " The file is executable; assume we should run
     if executable(a:filename)
-      exec ":!./" . a:filename
-    " Project-specific test script
-    elseif filereadable("script/test")
-        exec ":!script/test " . a:filename
-    " If we see python-looking tests, assume they should be run with tox
-    elseif strlen(glob("test/**/*.py") . glob("tests/**/*.py"))
+      exec ':!./' . a:filename
+    " If we see python-looking tests, assume they should be run with tox.
+    elseif strlen(glob('test/**/*.py') . glob('tests/**/*.py'))
       if strlen(a:filename)
-        exec "!tox -- -s -v " . a:filename
-      elseif strlen(glob("test/**/*.py"))
-        exec "!tox -- -s -v test"
-      elseif strlen(glob("tests/**/*.py"))
-        exec "!tox -- -s -v tests"
+        exec '!tox -- -s -v ' . a:filename
+      elseif strlen(glob('test/**/*.py'))
+        exec '!tox -- -s -v test'
+      else  " strlen(glob('tests/**/*.py'))
+        exec '!tox -- -s -v tests'
       end
-    elseif strlen(glob("**/*Spec.hs"))
+    " If we see haskell-looking tests, assume they should be run with stack.
+    elseif strlen(glob('**/*Spec.hs'))
       if strlen(a:filename)
-        exec ":!runghc " . a:filename
+        exec ':!stack runghc ' . a:filename
+      else  " strlen(glob('**/*Spec.hs'))
+        exec ':!stack test'
       end
     end
 endfunction
