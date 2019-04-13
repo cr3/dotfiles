@@ -15,3 +15,7 @@ vmap a- :Tabularize /-><CR>
 
 " supertab
 inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+
+" neco-ghc
+let g:haskellmode_completion_ghc = 1
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
