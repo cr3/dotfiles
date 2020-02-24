@@ -32,7 +32,8 @@ channels = (
   { name = "&bitlbee"; chatnet = "BitlBee"; autojoin = "Yes"; },
   { name = "#haskell"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#pylib"; chatnet = "Freenode"; autojoin = "yes"; },
-  { name = "#python-testing"; chatnet = "Freenode"; autojoin = "yes"; }
+  { name = "#python-testing"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "##rust"; chatnet = "Freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -298,6 +299,16 @@ windows = {
         type = "CHANNEL";
         chat_type = "IRC";
         name = "#haskell";
+        tag = "Freenode";
+      }
+    );
+  };
+  8 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "##rust";
         tag = "Freenode";
       }
     );
