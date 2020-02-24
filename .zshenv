@@ -22,14 +22,9 @@ export PERL5LIB="${HOME}/lib/perl"
 export PYTHONPATH="${HOME}/lib/python"
 
 ##
-# GHC variables
-export GHC_ROOT=/opt/ghc
-export PATH=$GHC_ROOT/bin:$PATH
-
-##
-# Cabal variables
-export CABAL_ROOT=$HOME/.cabal
-export PATH=$CABAL_ROOT/bin:$PATH
+# Stack variables
+export STACK_LOCAL=$HOME/.local
+export PATH=$STACK_LOCAL/bin:$PATH
 
 ##
 # Pyenv variables.
