@@ -4,15 +4,6 @@ snippet cabal
 	version:             0.1.0.0
 	build-type:          Simple
 
-snippet library
-	library
-	  -- exposed-modules:
-	  -- other-modules:
-	  -- other-extensions:
-	  build-depends:       base >=4.9 && <4.10
-	  -- hs-source-dirs:
-	  default-language:    Haskell2010
-
 snippet executable
 	executable ${2:exec}
 	  main-is:             ${0:main}.hs
@@ -22,13 +13,30 @@ snippet executable
 	  -- hs-source-dirs:
 	  default-language:    Haskell2010
 
+snippet hunit
+	Test-Suite unit
+	  type:                 exitcode-stdio-1.0
+	  default-language:     Haskell2010
+	  ghc-options:          -Wall
+	  main-is:              Tests.hs
+	  build-depends:        base
+	                      , HUnit
+
+snippet library
+	library
+	  -- exposed-modules:
+	  -- other-modules:
+	  -- other-extensions:
+	  build-depends:       base >=4.9 && <4.10
+	  -- hs-source-dirs:
+	  default-language:    Haskell2010
+
 snippet test
 	Test-Suite spec
-	  Type:                 exitcode-stdio-1.0
-	  Default-Language:     Haskell2010
-	  Hs-Source-Dirs:       tests
-	  Ghc-Options:          -Wall
-	  Main-Is:              Spec.hs
-	  Build-Depends:        base
+	  type:                 exitcode-stdio-1.0
+	  default-language:     Haskell2010
+	  ghc-options:          -Wall
+	  main-is:              Spec.hs
+	  build-depends:        base
 	                      , hspec
 	                      , QuickCheck
