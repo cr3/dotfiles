@@ -40,6 +40,9 @@ set nojoinspaces
 " Set shell to zsh for ~/.zsh* files
 set shell=zsh
 
+" Set tags from git hooks
+set tags=.git/tags
+
 " Enable highlighting when the terminal has colors.
 if &t_Co > 2 || has('gui_running')
   " Highlight syntax.
@@ -76,7 +79,7 @@ augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
 
-  autocmd FileType haskell set sw=2 sts=2 expandtab
+  autocmd FileType cabal,haskell set sw=2 sts=2 expandtab
   autocmd FileType javascript set sw=2 sts=2 autoindent expandtab nocindent smartindent
   autocmd FileType java set sw=4 sts=4 expandtab
   autocmd FileType python set sw=4 sts=4 expandtab
@@ -107,6 +110,7 @@ map <leader>v :view %%
 
 " ctrlp
 map <leader>f :CtrlP<cr>
+map <leader>. :CtrlPTag<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
@@ -117,14 +121,17 @@ nnoremap <leader>T :call RunTests('')<cr>
 
 function! RunTestFile(...)
     " Are we in a test file?
-    let l:py_test_file = match(expand('%'), '\(test_.*\.py\|_test.py\)$') != -1
-    let l:hs_test_file = match(expand('%'), '\(Spec.hs\)$') != -1
+    let l:hs_test_file = match(expand('%'), '\(Spec\.hs\|.*Tests\.hs\)$') != -1
+    let l:py_test_file = match(expand('%'), '\(test_.*\.py\|_test\.py\)$') != -1
+    let l:rs_test_file = match(expand('%'), '.*\.rs$') != -1
 
     " Run the tests for the previously-marked file (or the current file if
     " it's a test).
-    if l:py_test_file
+    if l:hs_test_file
         call SetTestFile('')
-    elseif l:hs_test_file
+    elseif l:py_test_file
+        call SetTestFile('')
+    elseif l:rs_test_file
         call SetTestFile('')
     elseif !exists('t:grb_test_file')
         return
@@ -149,22 +156,21 @@ function! RunTests(filename)
     end
     " The file is executable; assume we should run
     if executable(a:filename)
-      exec ':!./' . a:filename
+      exec '!./' . a:filename
+    " If we see haskell-looking tests, assume they should be run with stack.
+    elseif strlen(glob('**/*Spec.hs') . glob('**/*Tests.hs'))
+      :!stack test
+    " If we see rust-looking tests, assume they should be run with cargo.
+    elseif strlen(glob('**/*.rs'))
+      :!cargo test
     " If we see python-looking tests, assume they should be run with tox.
     elseif strlen(glob('test/**/*.py') . glob('tests/**/*.py'))
       if strlen(a:filename)
         exec '!tox -- -s -v ' . a:filename
       elseif strlen(glob('test/**/*.py'))
-        exec '!tox -- -s -v test'
+        :!tox -- -s -v test
       else  " strlen(glob('tests/**/*.py'))
-        exec '!tox -- -s -v tests'
-      end
-    " If we see haskell-looking tests, assume they should be run with stack.
-    elseif strlen(glob('**/*Spec.hs'))
-      if strlen(a:filename)
-        exec ':!stack runghc ' . a:filename
-      else  " strlen(glob('**/*Spec.hs'))
-        exec ':!stack test'
+        :!tox -- -s -v tests
       end
     end
 endfunction
