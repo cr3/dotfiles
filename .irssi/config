@@ -20,7 +20,7 @@ chatnets = {
   };
   Freenode = {
     type = "IRC";
-    autosendcmd = "/^msg nickserv identify PASSWORD; wait -Freenode 5000";
+    autosendcmd = "/^msg nickserv identify PASSWORD; wait -Freenode 8000";
     max_kicks = "4";
     max_modes = "4";
     max_msgs = "1";
