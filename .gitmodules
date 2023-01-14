@@ -31,3 +31,6 @@
 [submodule ".vim/bundle/ghcmod-vim"]
 	path = .vim/bundle/ghcmod-vim
 	url = git+ssh://git@github.com/eagletmt/ghcmod-vim.git
+[submodule ".vim/bundle/vimspector"]
+	path = .vim/bundle/vimspector
+	url = git+ssh://git@github.com/puremourning/vimspector.git
