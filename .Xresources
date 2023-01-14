@@ -15,9 +15,10 @@ XTerm*cutToBeginningOfLine:	false
 ! Color and font selection.
 XTerm.vt100.background:		white
 XTerm.vt100.foreground:		black
-XTerm.vt100.font:		-misc-fixed-medium-r-semicondensed-*-*-120-*-*-*-*-iso10646-1
-XTerm.vt100.boldFont:		-misc-fixed-bold-r-semicondensed-*-*-120-*-*-*-*-iso10646-1
+!XTerm.vt100.font:		-misc-fixed-medium-r-semicondensed-*-*-150-*-*-*-*-iso10646-1
+!XTerm.vt100.boldFont:		-misc-fixed-bold-r-semicondensed-*-*-150-*-*-*-*-iso10646-1
 XTerm.vt100.boldMode:		false
+XTerm*font:			*-fixed-*-*-*-20-*
 
 ! Muted colors.
 XTerm.vt100.color0:		black
