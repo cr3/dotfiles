@@ -90,9 +90,9 @@ bindkey -a "?" vi-history-search-backward
 # Other environment variables.
 
 # Check for the existence of an SSH agent.
-keychain --nocolor --quiet ~/.ssh/id_rsa 72679CAD
-. ~/.keychain/`hostname`-sh
-. ~/.keychain/`hostname`-sh-gpg
+#keychain --nocolor --quiet ~/.ssh/id_rsa 72679CAD
+#. ~/.keychain/`hostname`-sh
+#. ~/.keychain/`hostname`-sh-gpg
 
 # Location of the mailbox.
 case `hostname` in
@@ -115,6 +115,3 @@ export TMPDIR="/tmp"
 
 # Shell prompt.
 export PROMPT="[%m] [%~]%% "
-
-# added by travis gem
-[ -f /home/cr3/.travis/travis.sh ] && source /home/cr3/.travis/travis.sh
