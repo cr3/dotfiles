@@ -174,35 +174,6 @@ archive/outbox
   list/$MATCH
 }
 
-# I do not want to get my own mails bounced back
-:0
-* ^X-Launchpad-Bug:
-* ^From:.*marc.tardif@ubuntu.com
-/dev/null
-
-# Ignore bug mail for archive admin and bug status triaging
-:0
-* ^X-Launchpad-Bug:
-* ^X-Launchpad-Message-Rationale: Subscriber @(ubuntu-archive|ubuntu-qa)
-/dev/null
-
-# Adding me as an explicit subscriber or another team
-:0:
-* ^X-Launchpad-Bug:
-* ^X-Launchpad-Message-Rationale: Subscriber($| @checkbox| @launchpad)
-list/ubuntu
-
-# Bugs assigned to me
-:0:
-* ^X-Launchpad-Bug:
-* ^X-Launchpad-Message-Rationale: Assignee
-list/ubuntu
-
-# Everything else removed
-:0
-* ^X-Launchpad-Bug:
-/dev/null
-
 ## Filter emails.
 
 # Whitelist.
