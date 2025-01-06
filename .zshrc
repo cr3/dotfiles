@@ -38,6 +38,16 @@ setopt nopromptcr
 # Don't bug me about it if I type 'rm *'.
 setopt rm_star_silent
 
+##
+# Completion
+
+autoload -Uz compinit
+
+for dump in ~/.zcompdump(N.mh+24); do
+    compinit
+done
+
+compinit -C
 
 ##
 # Aliases.
