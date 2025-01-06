@@ -7,3 +7,6 @@
 	ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
 [init]
 	templatedir = /home/cr3/.gittemplate
+	defaultBranch = main
+[pull]
+	rebase = true
