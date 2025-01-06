@@ -190,11 +190,11 @@ function! RunTests(filename)
     elseif strlen(glob('**/test_*.py') . glob('test/**/*.py') . glob('tests/**/*.py'))
       if strlen(a:filename)
 	" exec '!python -m pytest ' . a:filename
-        exec '!tox -- -s -v ' . a:filename
+        exec '!poetry run pytest -s -v ' . a:filename
       elseif strlen(glob('test/**/*.py'))
-        :!tox -- -s -v test
+        :!poetry run pytest -s -v test
       else  " strlen(glob('tests/**/*.py'))
-        :!tox -- -s -v tests
+        :!poetry run pytest -s -v tests
       end
     " If we see rust-looking tests, assume they should be run with cargo.
     elseif strlen(glob('**/*.rs'))
