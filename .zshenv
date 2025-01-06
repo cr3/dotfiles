@@ -28,14 +28,17 @@ export PATH=$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 eval "$(pyenv init -)"
 
 ##
+# Nvm variables.
+export NVM_DIR=/home/dev/src/nvm
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  . "${NVM_DIR}/nvm.sh"
+fi
+
+##
 # Python variables
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   . "${VIRTUAL_ENV}/bin/activate"
 fi
-
-##
-# AWS variables.
-. ${HOME}/.zsh/aws.zsh
 
 case $TERM in
   screen*)
