@@ -30,7 +30,6 @@
 /.local
 /.mairixdb
 /.mozilla
-/.msmtprc
 /.procmail/blacklist
 /.procmail/list
 /.procmail/whitelist
