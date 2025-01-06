@@ -1,11 +1,5 @@
 # .screenrc-jrrr
 
-# Rarely used windows
-screen -t 'ircd'   10 bitlbee -D -i 127.0.0.1 -p 16667 -n -v -d ${HOME}/.bitlbee
-
-echo 'Waiting for daemons to start...'
-sleep 2
-
 # Frequently used windows
 screen -t 'sh'   1
 screen -t 'sh'   2
@@ -14,7 +8,7 @@ screen -t 'sh'   4
 screen -t 'sh'   5
 screen -t 'sh'   6
 screen -t 'mail' 7 mutt
-screen -t 'irc'  8 irssi
+screen -t 'tmp'  8
 screen -t 'tmp'  9
 screen -t 'tmp'  0
 

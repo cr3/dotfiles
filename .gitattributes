@@ -1,3 +1,2 @@
 .fetchmailrc filter=remove-fetchmailrc-password
-.irssi/config filter=remove-irssi-password
 .pypirc filter=remove-pypirc-password

@@ -12,7 +12,6 @@
 /.anacron
 /.ansible
 /.bazaar/lock
-/.bitlbee
 /.cache
 /.cargo
 /.certs/*.0
@@ -29,7 +28,6 @@
 /.gnupg
 /.ICEauthority
 /.irb-history
-/.irssi/config.autosave
 /.keybase
 /.keychain
 /.lesshst
