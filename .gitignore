@@ -6,11 +6,8 @@
 /log
 /mail
 /notes
-/R
 /sites
 /src
-/VirtualBox VMs
-/workbench.xmi
 /.abook/addressbook
 /.anacron
 /.ansible
@@ -25,6 +22,8 @@
 /.docker
 /.dotfiles
 /.gconf
+/.getmail/gmail.json
+/.getmail/oldmail*
 /.gimp-2.8
 /.gnome2
 /.gnupg

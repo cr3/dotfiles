@@ -1,0 +1,15 @@
+[retriever]
+type = SimpleIMAPSSLRetriever
+use_xoauth2 = True
+server = imap.gmail.com
+username = marc@interunion.ca
+password_command = ("getmail-gmail-xoauth-tokens", "/home/cr3/.getmail/gmail.json")
+
+[destination]
+type = MDA_external
+path = /usr/bin/procmail
+arguments = ("-f", "%(sender)")
+
+[options]
+read_all = true
+delete = true

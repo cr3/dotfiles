@@ -13,7 +13,7 @@ macro pager \cu "<pipe-message>uudeview -<enter>" "Call uudeview to decode attac
 macro attach \cu "<pipe-message>uudeview -<enter>" "Call uudeview to decode attachments"
 
 # Retrieve messages.
-macro index G "<pipe-message>fetchmail<enter>" "Call fetchmail to retrieve messages"
+macro index G "<pipe-message>getmail<enter>" "Call getmail to retrieve messages"
 
 # Add sender to addressbook.
 macro pager A "<pipe-message>abook --add-email<enter>" "Add sender to the addressbook"
